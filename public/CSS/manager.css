@@ -1,0 +1,91 @@
+p{
+    text-align: center;
+    color: rgb(180, 180, 180);
+}
+.name{
+    font-weight: bold;
+    font-size: 20px;
+}
+.ups{
+    background-color: transparent;
+    border:rgb(180, 180, 180) solid 1px;
+    color: rgb(180, 180, 180);
+    position: relative;
+    left:65px;
+    margin-top: 10px;
+}
+.ups:hover{
+    cursor: pointer;
+    background-color: rgb(180, 180, 180);
+    color:rgb(95, 95, 95);
+}
+form{
+    justify-content: center;
+}
+h1{
+    text-align: center;
+    font-size: 35px;
+    color: rgb(180, 180, 180);
+}
+h3{
+    font-size: 30px;
+    color: rgb(180, 180, 180);
+}
+body{
+    background-color: rgb(31, 31, 31);
+}
+.contain{
+    background-color:rgb(95, 95, 95);
+    width: 200px;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 25px;
+    display: grid;
+    -webkit-box-shadow: -2px 0px 14px -1px rgba(0,0,0,0.73); 
+    box-shadow: -2px 0px 14px -1px rgba(0,0,0,0.73);
+    transition: all .5s;
+    
+}
+.update{
+    justify-content: center;
+}
+.sauces_contain{
+    display: grid;
+    grid-template-columns: repeat(auto-fit,250px);
+    
+}
+.syrup_contain{
+    display: grid;
+    grid-template-columns: repeat(auto-fit,250px);
+  
+}
+.coffee_contain{
+    display: grid;
+    grid-template-columns: repeat(auto-fit,250px);
+    
+}
+.ground_contain{
+    display: grid;
+    grid-template-columns: repeat(auto-fit,250px);
+   
+}
+.tea_contain{
+    display: grid;
+    grid-template-columns: repeat(auto-fit,250px);
+  
+}
+.cold_contain{
+    display: grid;
+    grid-template-columns: repeat(auto-fit,250px);
+    
+}
+.milk_contain{
+    display: grid;
+    grid-template-columns: repeat(auto-fit,250px);
+   
+}
+.fruit_contain{
+    display: grid;
+    grid-template-columns: repeat(auto-fit,250px);
+    
+}

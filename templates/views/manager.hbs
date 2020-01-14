@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>manager</title>
+        <link href="CSS/manager.css" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <form action="/logout?_method=DELETE" method="POST">
+            <button type="submit">Log Out</button>
+        </form>
+           <h1>{{title}}</h1>
+            <h3 class="sauces">Sauces</h3>
+             <div class="sauces_contain"></div>
+            <h3 class="syrup">Syrup</h3>
+            <div class="syrup_contain"></div>
+            <h3 class="coffee_beans">Coffee Beans</h3>
+            <div class="coffee_contain"></div>
+            <h3 class="ground_coffee">Ground Coffee</h3>
+            <div class="ground_contain"></div>
+            <h3 class="tea">Tea</h3>
+            <div class="tea_contain"></div>
+            <h3 class="cold_brew">Cold Brew Tea</h3>
+            <div class="cold_contain"></div>
+            <h3 class="milk">Milk</h3>
+            <div class="milk_contain"></div>
+            <h3 class="fruit">Fruit</h3>
+            <div class="fruit_contain"></div>
+
+            <button class="all_form">Update All</button>
+            <h1>Create New</h1>
+            <form id="add">
+                <input id="desc"placeholder="desc">
+                <input id="nam"placeholder="name">
+                <input id="quan"type="number"placeholder="quanity">
+                <input id="min"type="number"placeholder="min">
+                <input id="max"type="number"placeholder="max">
+                <button>Create</button>
+            </form>
+        <script src="/JS/manager.js"></script>
+    </body>
+</html>
