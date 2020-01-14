@@ -1,6 +1,6 @@
-
+if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config() 
-
+  }
 
 // requiring different modules for application
 // path for directory managenment 
