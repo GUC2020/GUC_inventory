@@ -81,6 +81,11 @@ app.get('',checkAuthenticated,(req,res)=>{
     })
     console.log(req.user)
 })
+app.get('/',checkAuthenticated,(req,res)=>{
+    res.render('index',{
+    })
+    console.log(req.user)
+})
 app.get('/login',checkNotAuthenticated,(req,res)=>{
     res.render('login',{
     })
