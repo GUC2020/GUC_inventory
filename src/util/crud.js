@@ -3,6 +3,8 @@ const user = require('../models/user')
 const nodemailer = require('nodemailer');
 const email = require('./email')
 require('../db/mongoose')
+
+
 const add_user = (name,email,pass)=>{
     const new_user = new user({
         name:name,

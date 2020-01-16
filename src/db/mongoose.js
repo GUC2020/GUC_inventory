@@ -4,7 +4,6 @@ mongoose.connect('mongodb+srv://admin:admin@guc-xkyjr.mongodb.net/test?retryWrit
     useNewUrlParser:true,
     useCreateIndex:true,
     useUnifiedTopology: true,
-    
 })
 
 

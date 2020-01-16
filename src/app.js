@@ -25,7 +25,6 @@ const passport = require('passport')
 const flash = require('express-flash')
 const session = require('express-session')
 const methodOverride = require('method-override')
-
 const initializePassport = require('./passport-config')
 let users   
 setInterval(() => {
@@ -66,13 +65,6 @@ app.use(session({
 hbs.registerPartials(partials)
 //static directory to serve (this is the information that is always sent)
 app.use(express.static(pubDir))
-
-
-
-
-
-
-
 
 
 //path for render
