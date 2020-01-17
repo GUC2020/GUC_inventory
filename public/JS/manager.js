@@ -11,34 +11,47 @@ $(document).ready(function(){
     //scan database and pull/organize information
     fetch('/items').then((response)=>{
         response.json().then((data)=>{
-            // console.log(data.items.length)
+            var all = []
             for(i = 0; i < data.items.length; i++){
-                if(data.items[i].desc == "Sauces"){
-                    $('.sauces_contain').append("<div class='contain'>"+"<div class='delete'>X</div>"+"<p class='name'>"+data.items[i].name+"</p><p> quanity: "+data.items[i].quanity+"</p><p> min: "+data.items[i].min+"</p><p> max: "+data.items[i].max+ "<p style='display:none'>"+data.items[i].name+"</p><p style='display:none'>"+data.items[i].desc+'<form class="update"> <input class="two"type="number"placeholder="quantity"><input class="three"type="number"placeholder="min"><input class="four"type="number"placeholder="max"><button class="ups">Update</button></form></div>');
-                
-                }
-                if(data.items[i].desc == "Syrup"){
-                    $('.syrup_contain').append("<div class='contain'>"+"<div class='delete'>X</div>"+"<p class='name'>"+data.items[i].name+"</p><p> quanity: "+data.items[i].quanity+"</p><p> min: "+data.items[i].min+"</p><p> max: "+data.items[i].max+ "<p style='display:none'>"+data.items[i].name+"</p><p style='display:none'>"+data.items[i].desc+'<form class="update"> <input class="two"type="number"placeholder="quantity"><input class="three"type="number"placeholder="min"><input class="four"type="number"placeholder="max"><button class="ups">Update</button></form></div>');
-                }
-                if(data.items[i].desc == "Coffee Beans"){
-                    $('.coffee_contain').append("<div class='contain'>"+"<div class='delete'>X</div>"+"<p class='name'>"+data.items[i].name+"</p><p> quanity: "+data.items[i].quanity+"</p><p> min: "+data.items[i].min+"</p><p> max: "+data.items[i].max+ "<p style='display:none'>"+data.items[i].name+"</p><p style='display:none'>"+data.items[i].desc+'<form class="update"> <input class="two"type="number"placeholder="quantity"><input class="three"type="number"placeholder="min"><input class="four"type="number"placeholder="max"><button class="ups" >Update</button></form></div>');
-                }
-                if(data.items[i].desc == "Ground Coffee"){
-                    $('.ground_contain').append("<div class='contain'>"+"<div class='delete'>X</div>"+"<p class='name'>"+data.items[i].name+"</p><p> quanity: "+data.items[i].quanity+"</p><p> min: "+data.items[i].min+"</p><p> max: "+data.items[i].max+ "<p style='display:none'>"+data.items[i].name+"</p><p style='display:none'>"+data.items[i].desc+'<form class="update"> <input class="two"type="number"placeholder="quantity"><input class="three"type="number"placeholder="min"><input class="four"type="number"placeholder="max"><button class="ups">Update</button></form></div>');
-                }
-                if(data.items[i].desc == "Tea"){
-                    $('.tea_contain').append("<div class='contain'>"+"<div class='delete'>X</div>"+"<p class='name'>"+data.items[i].name+"</p><p> quanity: "+data.items[i].quanity+"</p><p> min: "+data.items[i].min+"</p><p> max: "+data.items[i].max+ "<p style='display:none'>"+data.items[i].name+"</p><p style='display:none'>"+data.items[i].desc+'<form class="update"> <input class="two"type="number"placeholder="quantity"><input class="three"type="number"placeholder="min"><input class="four"type="number"placeholder="max"><button class="ups">Update</button></form></div>');
-                }
-                if(data.items[i].desc == "Cold Brew Tea"){
-                    $('.cold_contain').append("<div class='contain'>"+"<div class='delete'>X</div>"+"<p class='name'>"+data.items[i].name+"</p><p> quanity: "+data.items[i].quanity+"</p><p> min: "+data.items[i].min+"</p><p> max: "+data.items[i].max+ "<p style='display:none'>"+data.items[i].name+"</p><p style='display:none'>"+data.items[i].desc+'<form class="update"> <input class="two"type="number"placeholder="quantity"><input class="three"type="number"placeholder="min"><input class="four"type="number"placeholder="max"><button class="ups">Update</button></form></div>');
-                }
-                if(data.items[i].desc == "Milk"){
-                    $('.milk_contain').append("<div class='contain'>"+"<div class='delete'>X</div>"+"<p class='name'>"+data.items[i].name+"</p><p> quanity: "+data.items[i].quanity+"</p><p> min: "+data.items[i].min+"</p><p> max: "+data.items[i].max+ "<p style='display:none'>"+data.items[i].name+"</p><p style='display:none'>"+data.items[i].desc+'<form class="update"> <input class="two"type="number"placeholder="quantity"><input class="three"type="number"placeholder="min"><input class="four"type="number"placeholder="max"><button class="ups">Update</button></form></div>');
-                }
-                if(data.items[i].desc == "Fruit"){
-                    $('.fruit_contain').append("<div class='contain'>"+"<div class='delete'>X</div>"+"<p class='name'>"+data.items[i].name+"</p><p> quanity: "+data.items[i].quanity+"</p><p> min: "+data.items[i].min+"</p><p> max: "+data.items[i].max+ "<p style='display:none'>"+data.items[i].name+"</p><p style='display:none'>"+data.items[i].desc+'<form class="update"> <input class="two"type="number"placeholder="quantity"><input class="three"type="number"placeholder="min"><input class="four"type="number"placeholder="max"><button class="ups">Update</button></form></div>');
+                all.push(data.items[i].desc)
+            }
+            const all_set = new Set(all);
+            all = [...all_set]
+            for(i=0; i < all.length;i++){
+                $('.start').after("<h3>"+all[i]+"</h3><div class='"+all[i]+"_contain'></div>");
+                for(j = 0; j < data.items.length; j++){
+                    if(data.items[j].desc === all[i]){
+                        $("."+all[i]+"_contain").append("<div class='contain'>"+"<div class='delete'>X</div>"+"<p class='name'>"+data.items[j].name+"</p><p> quanity: "+data.items[j].quanity+"</p><p> min: "+data.items[j].min+"</p><p> max: "+data.items[j].max+ "<p style='display:none'>"+data.items[j].name+"</p><p style='display:none'>"+data.items[j].desc+'<form class="update"> <input class="two"type="number"placeholder="quantity"><input class="three"type="number"placeholder="min"><input class="four"type="number"placeholder="max"><button class="ups">Update</button></form></div>');
+                    }
                 }
             }
+            // for(i = 0; i < data.items.length; i++){
+            //     if(data.items[i].desc == "Sauces"){
+            //         $('.sauces_contain').append("<div class='contain'>"+"<div class='delete'>X</div>"+"<p class='name'>"+data.items[i].name+"</p><p> quanity: "+data.items[i].quanity+"</p><p> min: "+data.items[i].min+"</p><p> max: "+data.items[i].max+ "<p style='display:none'>"+data.items[i].name+"</p><p style='display:none'>"+data.items[i].desc+'<form class="update"> <input class="two"type="number"placeholder="quantity"><input class="three"type="number"placeholder="min"><input class="four"type="number"placeholder="max"><button class="ups">Update</button></form></div>');
+                
+            //     }
+            //     if(data.items[i].desc == "Syrup"){
+            //         $('.syrup_contain').append("<div class='contain'>"+"<div class='delete'>X</div>"+"<p class='name'>"+data.items[i].name+"</p><p> quanity: "+data.items[i].quanity+"</p><p> min: "+data.items[i].min+"</p><p> max: "+data.items[i].max+ "<p style='display:none'>"+data.items[i].name+"</p><p style='display:none'>"+data.items[i].desc+'<form class="update"> <input class="two"type="number"placeholder="quantity"><input class="three"type="number"placeholder="min"><input class="four"type="number"placeholder="max"><button class="ups">Update</button></form></div>');
+            //     }
+            //     if(data.items[i].desc == "Coffee Beans"){
+            //         $('.coffee_contain').append("<div class='contain'>"+"<div class='delete'>X</div>"+"<p class='name'>"+data.items[i].name+"</p><p> quanity: "+data.items[i].quanity+"</p><p> min: "+data.items[i].min+"</p><p> max: "+data.items[i].max+ "<p style='display:none'>"+data.items[i].name+"</p><p style='display:none'>"+data.items[i].desc+'<form class="update"> <input class="two"type="number"placeholder="quantity"><input class="three"type="number"placeholder="min"><input class="four"type="number"placeholder="max"><button class="ups" >Update</button></form></div>');
+            //     }
+            //     if(data.items[i].desc == "Ground Coffee"){
+            //         $('.ground_contain').append("<div class='contain'>"+"<div class='delete'>X</div>"+"<p class='name'>"+data.items[i].name+"</p><p> quanity: "+data.items[i].quanity+"</p><p> min: "+data.items[i].min+"</p><p> max: "+data.items[i].max+ "<p style='display:none'>"+data.items[i].name+"</p><p style='display:none'>"+data.items[i].desc+'<form class="update"> <input class="two"type="number"placeholder="quantity"><input class="three"type="number"placeholder="min"><input class="four"type="number"placeholder="max"><button class="ups">Update</button></form></div>');
+            //     }
+            //     if(data.items[i].desc == "Tea"){
+            //         $('.tea_contain').append("<div class='contain'>"+"<div class='delete'>X</div>"+"<p class='name'>"+data.items[i].name+"</p><p> quanity: "+data.items[i].quanity+"</p><p> min: "+data.items[i].min+"</p><p> max: "+data.items[i].max+ "<p style='display:none'>"+data.items[i].name+"</p><p style='display:none'>"+data.items[i].desc+'<form class="update"> <input class="two"type="number"placeholder="quantity"><input class="three"type="number"placeholder="min"><input class="four"type="number"placeholder="max"><button class="ups">Update</button></form></div>');
+            //     }
+            //     if(data.items[i].desc == "Cold Brew Tea"){
+            //         $('.cold_contain').append("<div class='contain'>"+"<div class='delete'>X</div>"+"<p class='name'>"+data.items[i].name+"</p><p> quanity: "+data.items[i].quanity+"</p><p> min: "+data.items[i].min+"</p><p> max: "+data.items[i].max+ "<p style='display:none'>"+data.items[i].name+"</p><p style='display:none'>"+data.items[i].desc+'<form class="update"> <input class="two"type="number"placeholder="quantity"><input class="three"type="number"placeholder="min"><input class="four"type="number"placeholder="max"><button class="ups">Update</button></form></div>');
+            //     }
+            //     if(data.items[i].desc == "Milk"){
+            //         $('.milk_contain').append("<div class='contain'>"+"<div class='delete'>X</div>"+"<p class='name'>"+data.items[i].name+"</p><p> quanity: "+data.items[i].quanity+"</p><p> min: "+data.items[i].min+"</p><p> max: "+data.items[i].max+ "<p style='display:none'>"+data.items[i].name+"</p><p style='display:none'>"+data.items[i].desc+'<form class="update"> <input class="two"type="number"placeholder="quantity"><input class="three"type="number"placeholder="min"><input class="four"type="number"placeholder="max"><button class="ups">Update</button></form></div>');
+            //     }
+            //     if(data.items[i].desc == "Fruit"){
+            //         $('.fruit_contain').append("<div class='contain'>"+"<div class='delete'>X</div>"+"<p class='name'>"+data.items[i].name+"</p><p> quanity: "+data.items[i].quanity+"</p><p> min: "+data.items[i].min+"</p><p> max: "+data.items[i].max+ "<p style='display:none'>"+data.items[i].name+"</p><p style='display:none'>"+data.items[i].desc+'<form class="update"> <input class="two"type="number"placeholder="quantity"><input class="three"type="number"placeholder="min"><input class="four"type="number"placeholder="max"><button class="ups">Update</button></form></div>');
+            //     }
+            // }
         })
     })
 

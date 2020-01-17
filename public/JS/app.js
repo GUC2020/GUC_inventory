@@ -11,31 +11,18 @@ $(document).ready(function(){
 
 fetch('/items').then((response)=>{
     response.json().then((data)=>{
-        // console.log(data.items.length)
-        for(i = 0; i < data.items.length; i++){
-            if(data.items[i].desc == "Sauces"){
-                $('.sauces').after("<p>"+data.items[i].name+"</p><p> quanity: "+data.items[i].quanity+"</p>"+"<p style='display:none'>"+data.items[i].name+"</p><p style='display:none'>"+data.items[i].desc+'<form class="update"> <input class="two"type="number"placeholder="quantity"><button>Update</button></form>');
-            }
-            if(data.items[i].desc == "Syrup"){
-                $('.syrup').after("<p>"+data.items[i].name+"</p><p> quanity: "+data.items[i].quanity+"</p>"+"<p style='display:none'>"+data.items[i].name+"</p><p style='display:none'>"+data.items[i].desc+'<form class="update"> <input class="two"type="number"placeholder="quantity"><button>Update</button></form>');
-            }
-            if(data.items[i].desc == "Coffee Beans"){
-                $('.coffee_beans').after("<p>"+data.items[i].name+"</p><p> quanity: "+data.items[i].quanity+"</p>"+"<p style='display:none'>"+data.items[i].name+"</p><p style='display:none'>"+data.items[i].desc+'<form class="update"> <input class="two"type="number"placeholder="quantity"><button>Update</button></form>');
-            }
-            if(data.items[i].desc == "Ground Coffee"){
-                $('.ground_coffee').after("<p>"+data.items[i].name+"</p><p> quanity: "+data.items[i].quanity+"</p>"+"<p style='display:none'>"+data.items[i].name+"</p><p style='display:none'>"+data.items[i].desc+'<form class="update"> <input class="two"type="number"placeholder="quantity"><button>Update</button></form>');
-            }
-            if(data.items[i].desc == "Tea"){
-                $('.tea').after("<p>"+data.items[i].name+"</p><p> quanity: "+data.items[i].quanity+"</p>"+"<p style='display:none'>"+data.items[i].name+"</p><p style='display:none'>"+data.items[i].desc+'<form class="update"> <input class="two"type="number"placeholder="quantity"><button>Update</button></form>');
-            }
-            if(data.items[i].desc == "Cold Brew Tea"){
-                $('.cold_brew').after("<p>"+data.items[i].name+"</p><p> quanity: "+data.items[i].quanity+"</p>"+"<p style='display:none'>"+data.items[i].name+"</p><p style='display:none'>"+data.items[i].desc+'<form class="update"> <input class="two"type="number"placeholder="quantity"><button>Update</button></form>');
-            }
-            if(data.items[i].desc == "Milk"){
-                $('.milk').after("<p>"+data.items[i].name+"</p><p> quanity: "+data.items[i].quanity+"</p>"+"<p style='display:none'>"+data.items[i].name+"</p><p style='display:none'>"+data.items[i].desc+'<form class="update"> <input class="two"type="number"placeholder="quantity"><button>Update</button></form>');
-            }
-            if(data.items[i].desc == "Fruit"){
-                $('.fruit').after("<p>"+data.items[i].name+"</p><p> quanity: "+data.items[i].quanity+"</p>"+"<p style='display:none'>"+data.items[i].name+"</p><p style='display:none'>"+data.items[i].desc+'<form class="update"> <input class="two"type="number"placeholder="quantity"><button>Update</button></form>');
+        var all = []
+         for(i = 0; i < data.items.length; i++){
+            all.push(data.items[i].desc)
+        }
+        const all_set = new Set(all);
+        all = [...all_set]
+        for(i=0; i < all.length;i++){
+            $('body').append("<div class='"+all[i]+"'><h3>"+all[i]+"</h3></div>");
+            for(j = 0; j < data.items.length; j++){
+                if(data.items[j].desc === all[i]){
+                    $("."+all[i]).append("<p>"+data.items[j].name+"</p><p> quanity: "+data.items[j].quanity+"</p>"+"<p style='display:none'>"+data.items[j].name+"</p><p style='display:none'>"+data.items[j].desc+'<form class="update"> <input class="two"type="number"placeholder="quantity"><button>Update</button></form>');
+                }
             }
         }
     })
@@ -45,7 +32,6 @@ setTimeout(function(){
     console.log('ready')
     const updateForm = document.getElementsByClassName('update')
     const quanity = document.getElementsByClassName('two')
-    console.log(updateForm)
     for(let i=0;i<updateForm.length;i++){
         updateForm[i].addEventListener('submit',(e)=>{
             e.preventDefault()
