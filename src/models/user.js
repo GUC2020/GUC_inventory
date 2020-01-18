@@ -11,10 +11,8 @@ const User = mongoose.model('User',{
         trim:true,
         required:true
     },
-    email:{
-        type:String,
-        trim:true,
-        required:true
+    admin:{
+        type:Boolean,
     },
     password:{
         type:String,

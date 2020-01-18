@@ -5,10 +5,10 @@ const email = require('./email')
 require('../db/mongoose')
 
 
-const add_user = (name,email,pass)=>{
+const add_user = (name,admin,pass)=>{
     const new_user = new user({
         name:name,
-        email:email,
+        admin:admin,
         password:pass
     })
     new_user.save().then(()=>{
@@ -17,15 +17,16 @@ const add_user = (name,email,pass)=>{
         console.log(error)
     })
 }
-const find_user = (res)=> {
-    let li = []
-    user.find({}).then((items)=>{
-        
-        
-    })
+const find_user = (name)=> {
     
+    user.find({name:name}).then((items)=>{
+        return items
+    })
+    // console.log(list)
 }
 
+const test = find_user('admin')
+console.log(test)
 const add_item = (des,nam,quanity,min,max)=>{
     if(min > max){
         return console.log('Min cannot be larger than max')

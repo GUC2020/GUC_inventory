@@ -71,12 +71,10 @@ app.use(express.static(pubDir))
 app.get('',checkAuthenticated,(req,res)=>{
     res.render('index',{
     })
-    console.log(req.user)
 })
 app.get('/',checkAuthenticated,(req,res)=>{
     res.render('index',{
     })
-    console.log(req.user)
 })
 app.get('/login',checkNotAuthenticated,(req,res)=>{
     res.render('login',{
@@ -147,14 +145,19 @@ app.get('/update_full',(req,res)=>{
         li:'hi'
     })
 })
-app.get('/register', checkNotAuthenticated, (req, res) => {
+app.get('/register', checkAuthenticated,checkAdmin, (req, res) => {
     res.render('register')
   })
   
-app.post('/register', checkNotAuthenticated, async (req, res) => {
+app.post('/register', checkAuthenticated,checkAdmin, async (req, res) => {
+    console.log(req.body)
     try {
       const hashedPassword = await bcrypt.hash(req.body.password, 10)
-      create.add_user(req.body.name, req.body.email, hashedPassword)
+      let admin = false
+      if(req.body.admin === "on"){
+          admin = true
+      }
+      create.add_user(req.body.name, admin, hashedPassword)
       res.redirect('/login')
     } catch {
         console.log('nope')
@@ -185,13 +188,16 @@ app.delete('/logout', (req, res) => {
   }
 
   function checkAdmin(req, res, next) {
-      console.log(req.user)
-    if (req.user !== 'admin') {
-        return res.redirect('/')
-    }
-    next()
+    user.find({name:req.user}).then((users)=>{
+        console.log(users[0].admin)
+        if (users[0].admin !== true) {
+            return res.redirect('/')
+        }
+        next()
+    })
+    
   }
-
+  
 //running the port
 app.listen(port, ()=>{
     console.log('Server is up on port '+ port)
