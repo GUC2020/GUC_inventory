@@ -6,6 +6,7 @@ require('../db/mongoose')
 
 
 const add_user = (name,admin,pass)=>{
+    name.toLowerCase()
     const new_user = new user({
         name:name,
         admin:admin,
@@ -18,15 +19,11 @@ const add_user = (name,admin,pass)=>{
     })
 }
 const find_user = (name)=> {
-    
     user.find({name:name}).then((items)=>{
         return items
     })
-    // console.log(list)
 }
 
-const test = find_user('admin')
-console.log(test)
 const add_item = (des,nam,quanity,min,max)=>{
     if(min > max){
         return console.log('Min cannot be larger than max')

@@ -150,14 +150,13 @@ app.get('/register', checkAuthenticated,checkAdmin, (req, res) => {
   })
   
 app.post('/register', checkAuthenticated,checkAdmin, async (req, res) => {
-    console.log(req.body)
     try {
       const hashedPassword = await bcrypt.hash(req.body.password, 10)
       let admin = false
       if(req.body.admin === "on"){
           admin = true
       }
-      create.add_user(req.body.name, admin, hashedPassword)
+      create.add_user(req.body.name.toLowerCase(), admin, hashedPassword)
       res.redirect('/login')
     } catch {
         console.log('nope')
@@ -189,7 +188,6 @@ app.delete('/logout', (req, res) => {
 
   function checkAdmin(req, res, next) {
     user.find({name:req.user}).then((users)=>{
-        console.log(users[0].admin)
         if (users[0].admin !== true) {
             return res.redirect('/')
         }

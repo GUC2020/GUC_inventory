@@ -18,15 +18,53 @@ fetch('/items').then((response)=>{
         const all_set = new Set(all);
         all = [...all_set]
         for(i=0; i < all.length;i++){
-            $('body').append("<div class='"+all[i]+"'><h3>"+all[i]+"</h3></div>");
+            $(".options").append("<div class='"+all[i]+" item'><h3>"+all[i]+"</h3></div>");
+            $(".grid").append("<div class='item_container ind_"+all[i]+"'></div>")
             for(j = 0; j < data.items.length; j++){
                 if(data.items[j].desc === all[i]){
-                    $("."+all[i]).append("<p>"+data.items[j].name+"</p><p> quanity: "+data.items[j].quanity+"</p>"+"<p style='display:none'>"+data.items[j].name+"</p><p style='display:none'>"+data.items[j].desc+'<form class="update"> <input class="two"type="number"placeholder="quantity"><button>Update</button></form>');
+                    $(".ind_"+all[i]).append("<div class='info'><p>"+data.items[j].name+"</p><p> quanity: "+data.items[j].quanity+"</p>"+"<p style='display:none'>"+data.items[j].name+"</p><p style='display:none'>"+data.items[j].desc+'<form class="update"> <input class="two"type="number"placeholder="quantity"><button>Update</button></form></div>');
                 }
             }
         }
     })
 })
+setTimeout(function(){
+    var acc = document.getElementsByClassName("item");
+    var i;
+
+    for (i = 0; i < acc.length; i++) {
+        console.log('added')
+        acc[i].addEventListener("click", function() {
+        /* Toggle between adding and removing the "active" class,
+        to highlight the button that controls the panel */
+        this.classList.toggle("active");
+
+        /* Toggle between hiding and showing the active panel */
+        panel = $('.ind_'+ this.textContent).children()
+        panel_sib = $('.ind_'+ this.textContent).siblings().children()
+        panel_parent = $('.ind_'+ this.textContent)
+        panel_pib = $('.ind_'+ this.textContent).siblings()
+        console.log(panel)
+        for (i=0;i<panel.length;i++){
+            if ($(panel).css('max-height') == '0px') {
+                console.log('true')
+                $(panel_sib).css({'max-height':0})
+                $(panel_pib).css({'display':'none'})
+                $(panel_parent).css({'display':'inline-flex'})
+                $(panel).each(function(){
+                    $(this).css({'max-height':panel[i].scrollHeight})
+                })
+                }else {
+                    console.log('false')
+                    $(panel_parent).css({'display':'none'})
+                    $(panel).css({'max-height':0})
+                }
+        }
+        
+  });
+}
+
+},2000)
 
 setTimeout(function(){
     console.log('ready')
