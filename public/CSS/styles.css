@@ -16,14 +16,27 @@ body{
     width: 80vw;
     margin: 0 auto;
     background-color: rgba(245, 245, 245, 0.849) ;
-    height: 1000px;
+    min-height: 500px;
+    font-family: 'Roboto', sans-serif;
 }
 .item{
-    margin: 10px;
     cursor: pointer;
+    width: 100px;
+    color: #4B382A;
+    background-color:rgb(254, 197, 82);
+    padding: 0;
+}
+.options{
+    background-color:rgb(254, 197, 82);
+    align-content: center;
+    -webkit-box-shadow: 1px 12px 14px -12px rgba(0,0,0,0.75);
+    -moz-box-shadow: 1px 12px 14px -12px rgba(0,0,0,0.75);
+    box-shadow: 1px 12px 14px -12px rgba(0,0,0,0.75);
+    z-index: 20;
 }
 h3{
     text-align: center;
+    
 }
 .options{
     display: flex;
@@ -33,19 +46,42 @@ h3{
     justify-content: center;
 }
 .info{
-
-    max-height: 0px;
-    overflow: hidden;
-    transition: max-height .1s;
-}
-.item_container{
     display: inline-flex;
     flex-direction: row;
     flex-wrap: wrap;
+    max-height: 0px;
+    overflow: hidden;
+    transition: max-height .1s;
+    justify-content: center;
+    width: 100%;
+    background-color: rgba(245, 245, 245, 0.849) ;
+}
+.item_container{
+    display: inline-flex;
+    flex-direction: column;
+    flex-wrap: wrap;
     float: left;
+    width: 100%;
+    background-color: rgba(245, 245, 245, 0.849) ;
 }
 .grid{
     display: inline-flex;
     flex-direction: row;
     flex-wrap: wrap;
+    background-color: rgba(245, 245, 245, 0.849) ;
+}
+.active{
+    background-color: #4B382A;
+    color:rgb(254, 197, 82);
+}
+input{
+    background-color: rgb(254, 197, 82) ;
+    margin-left: 10px;
+    margin-top: 15px;;
+}
+.update{
+    align-content: center;
+}
+p{
+    margin-left: 5px;
 }

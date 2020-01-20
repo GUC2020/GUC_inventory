@@ -22,7 +22,7 @@ fetch('/items').then((response)=>{
             $(".grid").append("<div class='item_container ind_"+all[i]+"'></div>")
             for(j = 0; j < data.items.length; j++){
                 if(data.items[j].desc === all[i]){
-                    $(".ind_"+all[i]).append("<div class='info'><p>"+data.items[j].name+"</p><p> quanity: "+data.items[j].quanity+"</p>"+"<p style='display:none'>"+data.items[j].name+"</p><p style='display:none'>"+data.items[j].desc+'<form class="update"> <input class="two"type="number"placeholder="quantity"><button>Update</button></form></div>');
+                    $(".ind_"+all[i]).append("<div class='info'><p>"+data.items[j].name+" </p><p> quanity: "+data.items[j].quanity+"</p>"+"<p style='display:none'>"+data.items[j].name+"</p><p style='display:none'>"+data.items[j].desc+'<form class="update"> <input class="two"type="number"placeholder="quantity"><button>Update</button></form></div>');
                 }
             }
         }
@@ -37,8 +37,12 @@ setTimeout(function(){
         acc[i].addEventListener("click", function() {
         /* Toggle between adding and removing the "active" class,
         to highlight the button that controls the panel */
-        this.classList.toggle("active");
-
+        if($(this).hasClass('.active')){
+            console.log('has it')
+        }else{
+            $(this).addClass('active')
+        }
+        $(this).siblings().removeClass('active')
         /* Toggle between hiding and showing the active panel */
         panel = $('.ind_'+ this.textContent).children()
         panel_sib = $('.ind_'+ this.textContent).siblings().children()
@@ -56,8 +60,6 @@ setTimeout(function(){
                 })
                 }else {
                     console.log('false')
-                    $(panel_parent).css({'display':'none'})
-                    $(panel).css({'max-height':0})
                 }
         }
         
