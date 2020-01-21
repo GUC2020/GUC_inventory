@@ -18,44 +18,60 @@ $(document).ready(function(){
             const all_set = new Set(all);
             all = [...all_set]
             for(i=0; i < all.length;i++){
-                $('.start').after("<h3>"+all[i]+"</h3><div class='"+all[i]+"_contain'></div>");
+                $(".options").append("<div class='"+all[i]+" item'><h3>"+all[i]+"</h3></div>");
+                $(".grid").append("<div class='item_container ind_"+all[i]+"'></div>")
                 for(j = 0; j < data.items.length; j++){
                     if(data.items[j].desc === all[i]){
-                        $("."+all[i]+"_contain").append("<div class='contain'>"+"<div class='delete'>X</div>"+"<p class='name'>"+data.items[j].name+"</p><p> quanity: "+data.items[j].quanity+"</p><p> min: "+data.items[j].min+"</p><p> max: "+data.items[j].max+ "<p style='display:none'>"+data.items[j].name+"</p><p style='display:none'>"+data.items[j].desc+'<form class="update"> <input class="two"type="number"placeholder="quantity"><input class="three"type="number"placeholder="min"><input class="four"type="number"placeholder="max"><button class="ups">Update</button></form></div>');
+                        $(".ind_"+all[i]).append("<div class='info'><div class='delete'>X</div><p>"+data.items[j].name+" </p><p> quanity: "+data.items[j].quanity+"</p><p>min: "+data.items[j].min+"</p><p>max: "+data.items[j].max+"</p><p style='display:none'>"+data.items[j].name+"</p><p style='display:none'>"+data.items[j].desc+'<form class="update"> <input class="two"type="number"placeholder="quantity"><input class="three"type="number"placeholder="min"><input class="four"type="number"placeholder="max"><button class="ups">Update</button></form></div>');
                     }
                 }
             }
-            // for(i = 0; i < data.items.length; i++){
-            //     if(data.items[i].desc == "Sauces"){
-            //         $('.sauces_contain').append("<div class='contain'>"+"<div class='delete'>X</div>"+"<p class='name'>"+data.items[i].name+"</p><p> quanity: "+data.items[i].quanity+"</p><p> min: "+data.items[i].min+"</p><p> max: "+data.items[i].max+ "<p style='display:none'>"+data.items[i].name+"</p><p style='display:none'>"+data.items[i].desc+'<form class="update"> <input class="two"type="number"placeholder="quantity"><input class="three"type="number"placeholder="min"><input class="four"type="number"placeholder="max"><button class="ups">Update</button></form></div>');
-                
-            //     }
-            //     if(data.items[i].desc == "Syrup"){
-            //         $('.syrup_contain').append("<div class='contain'>"+"<div class='delete'>X</div>"+"<p class='name'>"+data.items[i].name+"</p><p> quanity: "+data.items[i].quanity+"</p><p> min: "+data.items[i].min+"</p><p> max: "+data.items[i].max+ "<p style='display:none'>"+data.items[i].name+"</p><p style='display:none'>"+data.items[i].desc+'<form class="update"> <input class="two"type="number"placeholder="quantity"><input class="three"type="number"placeholder="min"><input class="four"type="number"placeholder="max"><button class="ups">Update</button></form></div>');
-            //     }
-            //     if(data.items[i].desc == "Coffee Beans"){
-            //         $('.coffee_contain').append("<div class='contain'>"+"<div class='delete'>X</div>"+"<p class='name'>"+data.items[i].name+"</p><p> quanity: "+data.items[i].quanity+"</p><p> min: "+data.items[i].min+"</p><p> max: "+data.items[i].max+ "<p style='display:none'>"+data.items[i].name+"</p><p style='display:none'>"+data.items[i].desc+'<form class="update"> <input class="two"type="number"placeholder="quantity"><input class="three"type="number"placeholder="min"><input class="four"type="number"placeholder="max"><button class="ups" >Update</button></form></div>');
-            //     }
-            //     if(data.items[i].desc == "Ground Coffee"){
-            //         $('.ground_contain').append("<div class='contain'>"+"<div class='delete'>X</div>"+"<p class='name'>"+data.items[i].name+"</p><p> quanity: "+data.items[i].quanity+"</p><p> min: "+data.items[i].min+"</p><p> max: "+data.items[i].max+ "<p style='display:none'>"+data.items[i].name+"</p><p style='display:none'>"+data.items[i].desc+'<form class="update"> <input class="two"type="number"placeholder="quantity"><input class="three"type="number"placeholder="min"><input class="four"type="number"placeholder="max"><button class="ups">Update</button></form></div>');
-            //     }
-            //     if(data.items[i].desc == "Tea"){
-            //         $('.tea_contain').append("<div class='contain'>"+"<div class='delete'>X</div>"+"<p class='name'>"+data.items[i].name+"</p><p> quanity: "+data.items[i].quanity+"</p><p> min: "+data.items[i].min+"</p><p> max: "+data.items[i].max+ "<p style='display:none'>"+data.items[i].name+"</p><p style='display:none'>"+data.items[i].desc+'<form class="update"> <input class="two"type="number"placeholder="quantity"><input class="three"type="number"placeholder="min"><input class="four"type="number"placeholder="max"><button class="ups">Update</button></form></div>');
-            //     }
-            //     if(data.items[i].desc == "Cold Brew Tea"){
-            //         $('.cold_contain').append("<div class='contain'>"+"<div class='delete'>X</div>"+"<p class='name'>"+data.items[i].name+"</p><p> quanity: "+data.items[i].quanity+"</p><p> min: "+data.items[i].min+"</p><p> max: "+data.items[i].max+ "<p style='display:none'>"+data.items[i].name+"</p><p style='display:none'>"+data.items[i].desc+'<form class="update"> <input class="two"type="number"placeholder="quantity"><input class="three"type="number"placeholder="min"><input class="four"type="number"placeholder="max"><button class="ups">Update</button></form></div>');
-            //     }
-            //     if(data.items[i].desc == "Milk"){
-            //         $('.milk_contain').append("<div class='contain'>"+"<div class='delete'>X</div>"+"<p class='name'>"+data.items[i].name+"</p><p> quanity: "+data.items[i].quanity+"</p><p> min: "+data.items[i].min+"</p><p> max: "+data.items[i].max+ "<p style='display:none'>"+data.items[i].name+"</p><p style='display:none'>"+data.items[i].desc+'<form class="update"> <input class="two"type="number"placeholder="quantity"><input class="three"type="number"placeholder="min"><input class="four"type="number"placeholder="max"><button class="ups">Update</button></form></div>');
-            //     }
-            //     if(data.items[i].desc == "Fruit"){
-            //         $('.fruit_contain').append("<div class='contain'>"+"<div class='delete'>X</div>"+"<p class='name'>"+data.items[i].name+"</p><p> quanity: "+data.items[i].quanity+"</p><p> min: "+data.items[i].min+"</p><p> max: "+data.items[i].max+ "<p style='display:none'>"+data.items[i].name+"</p><p style='display:none'>"+data.items[i].desc+'<form class="update"> <input class="two"type="number"placeholder="quantity"><input class="three"type="number"placeholder="min"><input class="four"type="number"placeholder="max"><button class="ups">Update</button></form></div>');
+            // for(i=0; i < all.length;i++){
+            //     $('.start').after("<h3>"+all[i]+"</h3><div class='"+all[i]+"_contain'></div>");
+            //     for(j = 0; j < data.items.length; j++){
+            //         if(data.items[j].desc === all[i]){
+            //             $("."+all[i]+"_contain").append("<div class='contain'>"+"<div class='delete'>X</div>"+"<p class='name'>"+data.items[j].name+"</p><p> quanity: "+data.items[j].quanity+"</p><p> min: "+data.items[j].min+"</p><p> max: "+data.items[j].max+ "<p style='display:none'>"+data.items[j].name+"</p><p style='display:none'>"+data.items[j].desc+'<form class="update"> <input class="two"type="number"placeholder="quantity"><input class="three"type="number"placeholder="min"><input class="four"type="number"placeholder="max"><button class="ups">Update</button></form></div>');
+            //         }
             //     }
             // }
+            
         })
     })
+    setTimeout(function(){
+        var acc = document.getElementsByClassName("item");
+        var i;
+    
+        for (i = 0; i < acc.length; i++) {
+            console.log('added')
+            acc[i].addEventListener("click", function() {
+            /* Toggle between adding and removing the "active" class,
+            to highlight the button that controls the panel */
+            if($(this).hasClass('.active')){
+            }else{
+                $(this).addClass('active')
+            }
+            $(this).siblings().removeClass('active')
+            /* Toggle between hiding and showing the active panel */
+            panel = $('.ind_'+ this.textContent).children()
+            panel_sib = $('.ind_'+ this.textContent).siblings().children()
+            panel_parent = $('.ind_'+ this.textContent)
+            panel_pib = $('.ind_'+ this.textContent).siblings()
+            for (i=0;i<panel.length;i++){
+                if ($(panel).css('max-height') == '0px') {
+                    $(panel_sib).css({'max-height':0})
+                    $(panel_pib).css({'display':'none'})
+                    $(panel_parent).css({'display':'inline-flex'})
+                    $(panel).each(function(){
+                        $(this).css({'max-height':panel[i].scrollHeight})
+                    })
+                    }
+            }
+            
+      });
+    }
+},2000)
 
-    //settimeout so we can fetch current database info
+//settimeout so we can fetch current database info
     
 setTimeout(function(){
     
@@ -132,6 +148,8 @@ setTimeout(function(){
     const curr_delete =  document.getElementsByClassName('delete')
     for (i = 0; i < curr_delete.length;i++){
         $(curr_delete[i]).click(function(){
+            console.log($(this).parent())
+            $(this).parent().css({'max-height':0})
             const na = this.nextSibling.textContent
             const des = this.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.textContent
             console.log(des)
@@ -140,6 +158,7 @@ setTimeout(function(){
                 })
             })
         })
+        
     }
 },1000)
 

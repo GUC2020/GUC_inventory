@@ -38,7 +38,6 @@ setTimeout(function(){
         /* Toggle between adding and removing the "active" class,
         to highlight the button that controls the panel */
         if($(this).hasClass('.active')){
-            console.log('has it')
         }else{
             $(this).addClass('active')
         }
@@ -48,18 +47,14 @@ setTimeout(function(){
         panel_sib = $('.ind_'+ this.textContent).siblings().children()
         panel_parent = $('.ind_'+ this.textContent)
         panel_pib = $('.ind_'+ this.textContent).siblings()
-        console.log(panel)
         for (i=0;i<panel.length;i++){
             if ($(panel).css('max-height') == '0px') {
-                console.log('true')
                 $(panel_sib).css({'max-height':0})
                 $(panel_pib).css({'display':'none'})
                 $(panel_parent).css({'display':'inline-flex'})
                 $(panel).each(function(){
                     $(this).css({'max-height':panel[i].scrollHeight})
                 })
-                }else {
-                    console.log('false')
                 }
         }
         

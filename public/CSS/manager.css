@@ -1,91 +1,133 @@
-p{
-    text-align: center;
-    color: rgb(180, 180, 180);
+
+
+body{
+    background-color:  rgba(223, 223, 223, 0.849);
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
 }
-.name{
-    font-weight: bold;
-    font-size: 20px;
-}
-.ups{
-    background-color: transparent;
-    border:rgb(180, 180, 180) solid 1px;
-    color: rgb(180, 180, 180);
+.main-content{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
     position: relative;
-    left:65px;
-    margin-top: 10px;
+    width: 80vw;
+    
+    margin: 0 auto;
+    margin-top: 200px;
+    background-color: rgba(245, 245, 245) ;
+    min-height: 500px;
+    font-family: 'Roboto', sans-serif;
 }
-.ups:hover{
+.item{
     cursor: pointer;
-    background-color: rgb(180, 180, 180);
-    color:rgb(95, 95, 95);
+    width: 100px;
+    color: #4B382A;
+    background-color:rgb(254, 197, 82);
+    padding: 0;
 }
-form{
-    justify-content: center;
-}
-h1{
-    text-align: center;
-    font-size: 35px;
-    color: rgb(180, 180, 180);
+.options{
+    background-color:rgb(254, 197, 82);
+    align-content: center;
+    -webkit-box-shadow: 1px 12px 14px -12px rgba(0,0,0,0.75);
+    -moz-box-shadow: 1px 12px 14px -12px rgba(0,0,0,0.75);
+    box-shadow: 1px 12px 14px -12px rgba(0,0,0,0.75);
+    z-index: 20;
 }
 h3{
-    font-size: 30px;
-    color: rgb(180, 180, 180);
-}
-body{
-    background-color: rgb(31, 31, 31);
-}
-.contain{
-    background-color:rgb(95, 95, 95);
-    width: 200px;
-    padding: 20px;
-    margin: 20px;
-    border-radius: 25px;
-    display: grid;
-    -webkit-box-shadow: -2px 0px 14px -1px rgba(0,0,0,0.73); 
-    box-shadow: -2px 0px 14px -1px rgba(0,0,0,0.73);
-    transition: all .5s;
+    text-align: center;
     
 }
-.update{
+.options{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
     justify-content: center;
 }
-.sauces_contain{
-    display: grid;
-    grid-template-columns: repeat(auto-fit,250px);
+.info{
+    display: inline-flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    max-height: 0px;
+    overflow: hidden;
+    transition: max-height .1s;
+    justify-content: center;
+    background-color: rgba(245, 245, 245) ;
+    width: 100%;
+}
+.item_container{
+    display: inline-flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    float: left;
+    width: 100%;
+    background-color: rgba(245, 245, 245) ;
+}
+.grid{
+    display: inline-flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    background-color: rgba(245, 245, 245) ;
+}
+.active{
+    background-color: #4B382A;
+    color:rgb(254, 197, 82);
+}
+input{
+    background-color: rgb(254, 197, 82) ;
+    margin-left: 10px;
+    margin-top: 15px;;
+}
+.update{
     
+    align-content: center;
 }
-.syrup_contain{
-    display: grid;
-    grid-template-columns: repeat(auto-fit,250px);
-  
+p{
+    display: inline-block;
+    width: 100px;
 }
-.coffee_contain{
-    display: grid;
-    grid-template-columns: repeat(auto-fit,250px);
-    
+
+
+.logout{
+    position: fixed;
+    right: 0;
+    background-color: transparent;
+    border:#4B382A solid 1px;
+    color: #4B382A;
+    height: 50px;
+    width: 100px;
+    font-size: 20px;
+    margin: 10px;
 }
-.ground_contain{
-    display: grid;
-    grid-template-columns: repeat(auto-fit,250px);
-   
+
+.update > button{
+    background-color: transparent;
+    border:#4B382A solid 1px;
+    color: #4B382A;
+    height: 20px;
+    width: 50px;
+    font-size: 10px;
 }
-.tea_contain{
-    display: grid;
-    grid-template-columns: repeat(auto-fit,250px);
-  
+button:hover{
+    cursor: pointer;
+    background-color: #4B382A;
+    color:rgb(254, 197, 82);
 }
-.cold_contain{
-    display: grid;
-    grid-template-columns: repeat(auto-fit,250px);
-    
+.all_form{
+    background-color: transparent;
+    border:#4B382A solid 1px;
+    color: #4B382A;
+    width: 200px;
+    font-size: 30px;
+    margin: 0 auto;
+    margin-top: 10px;;
 }
-.milk_contain{
-    display: grid;
-    grid-template-columns: repeat(auto-fit,250px);
-   
-}
-.fruit_contain{
-    display: grid;
-    grid-template-columns: repeat(auto-fit,250px);
-    
+.two,.three,.four{
+    width: 50px;
 }

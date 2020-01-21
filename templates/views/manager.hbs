@@ -5,28 +5,16 @@
         <link href="CSS/manager.css" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
     </head>
     <body>
-        <form action="/logout?_method=DELETE" method="POST">
-            <button type="submit">Log Out</button>
+        <form class="logout_form" action="/logout?_method=DELETE" method="POST">
+            <button class = "logout"type="submit">Log Out</button>
         </form>
-           <h1 class="start">{{title}}</h1>
-            {{!-- <h3 class="sauces">Sauces</h3>
-             <div class="sauces_contain"></div>
-            <h3 class="syrup">Syrup</h3>
-            <div class="syrup_contain"></div>
-            <h3 class="coffee_beans">Coffee Beans</h3>
-            <div class="coffee_contain"></div>
-            <h3 class="ground_coffee">Ground Coffee</h3>
-            <div class="ground_contain"></div>
-            <h3 class="tea">Tea</h3>
-            <div class="tea_contain"></div>
-            <h3 class="cold_brew">Cold Brew Tea</h3>
-            <div class="cold_contain"></div>
-            <h3 class="milk">Milk</h3>
-            <div class="milk_contain"></div>
-            <h3 class="fruit">Fruit</h3>
-            <div class="fruit_contain"></div> --}}
+            <div class="main-content">
+                <div class="options"></div>
+                <div class="grid"></div>
+            </div>
 
             <button class="all_form">Update All</button>
             <h1>Create New</h1>

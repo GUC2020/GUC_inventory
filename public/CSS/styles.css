@@ -1,7 +1,5 @@
 body{
     background-color:  rgba(223, 223, 223, 0.849);
-    justify-content: center;
-    align-content: center;
     width: 100vw;
     height: 100vh;
     position: absolute;
@@ -13,9 +11,11 @@ body{
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
+    position: relative;
     width: 80vw;
+    top: 200px;
     margin: 0 auto;
-    background-color: rgba(245, 245, 245, 0.849) ;
+    background-color: rgba(245, 245, 245) ;
     min-height: 500px;
     font-family: 'Roboto', sans-serif;
 }
@@ -53,22 +53,22 @@ h3{
     overflow: hidden;
     transition: max-height .1s;
     justify-content: center;
+    background-color: rgba(245, 245, 245) ;
     width: 100%;
-    background-color: rgba(245, 245, 245, 0.849) ;
 }
 .item_container{
     display: inline-flex;
-    flex-direction: column;
+    flex-direction: row;
     flex-wrap: wrap;
     float: left;
     width: 100%;
-    background-color: rgba(245, 245, 245, 0.849) ;
+    background-color: rgba(245, 245, 245) ;
 }
 .grid{
     display: inline-flex;
     flex-direction: row;
     flex-wrap: wrap;
-    background-color: rgba(245, 245, 245, 0.849) ;
+    background-color: rgba(245, 245, 245) ;
 }
 .active{
     background-color: #4B382A;
@@ -80,8 +80,36 @@ input{
     margin-top: 15px;;
 }
 .update{
+    
     align-content: center;
 }
 p{
-    margin-left: 5px;
+    display: inline-block;
+    width: 100px;
+}
+
+.update > button{
+    background-color: transparent;
+    border:#4B382A solid 1px;
+    color: #4B382A;
+    height: 20px;
+    width: 50px;
+    font-size: 10px;
+}
+button:hover{
+    cursor: pointer;
+    background-color: #4B382A;
+    color:rgb(254, 197, 82);
+}
+
+.logout{
+    position: fixed;
+    right: 0;
+    background-color: transparent;
+    border:#4B382A solid 1px;
+    color: #4B382A;
+    height: 50px;
+    width: 100px;
+    font-size: 20px;
+    margin: 10px;
 }
