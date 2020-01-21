@@ -129,7 +129,9 @@ setTimeout(function(){
 },1000)
 
 
-
+setInterval(() => {
+    $('.all_form').css({'top':'1%'})
+}, 1000);
 addForm.addEventListener('submit',(e)=>{
     e.preventDefault()
     // console.log('hi')
@@ -149,7 +151,7 @@ setTimeout(function(){
     for (i = 0; i < curr_delete.length;i++){
         $(curr_delete[i]).click(function(){
             console.log($(this).parent())
-            $(this).parent().css({'max-height':0})
+            $(this).parent().css({'max-height':0,'display':'none'})
             const na = this.nextSibling.textContent
             const des = this.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.textContent
             console.log(des)
@@ -161,22 +163,6 @@ setTimeout(function(){
         
     }
 },1000)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //function for updating all of the different forms at once
 //goes through all the different forms and clicks their update button
