@@ -19,7 +19,6 @@ body{
     margin: 0 auto;
     margin-top: 200px;
     background-color: rgba(245, 245, 245) ;
-    min-height: 500px;
     font-family: 'Roboto', sans-serif;
 }
 .item{
@@ -124,7 +123,7 @@ button:hover{
     width: 200px;
     font-size: 30px;
     margin: 0 auto;
-    top: 0%;
+    margin-top: 50px;
     position: relative;
 }
 .two,.three,.four{

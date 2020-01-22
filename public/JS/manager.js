@@ -130,7 +130,8 @@ setTimeout(function(){
 
 
 setInterval(() => {
-    $('.all_form').css({'top':'1%'})
+    console.log()
+    // $('.main-content').css({'height':$('.main-content').css('min-height')})
 }, 1000);
 addForm.addEventListener('submit',(e)=>{
     e.preventDefault()
