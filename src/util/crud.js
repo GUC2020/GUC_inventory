@@ -1,9 +1,29 @@
 const item = require('../models/item')
 const user = require('../models/user')
+const chart = require('../models/chart')
 const nodemailer = require('nodemailer');
 const email = require('./email')
 require('../db/mongoose')
 
+const add_chart = (des,nam,quanity,min,max,date)=>{
+    if(min > max){
+        return console.log('Min cannot be larger than max')
+    }
+    const new_chart = new chart({
+        desc:des,
+        name:nam,
+        quanity:quanity,
+        min:min,
+        max:max,
+        date:date
+    })
+    new_chart.save().then(()=>{
+        console.log(new_chart)
+    }).catch((error)=>{
+        console.log(error)
+    })
+}
+let d = new Date();
 
 const add_user = (name,admin,pass)=>{
     name.toLowerCase()

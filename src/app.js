@@ -20,6 +20,7 @@ const email = require('./util/email')
 //adding in functionality for altering inventory
 const item = require('./models/item')
 const user = require('./models/user')
+const charts = require('./models/chart')
 const bcrypt = require('bcrypt')
 const passport = require('passport')
 const flash = require('express-flash')
@@ -93,13 +94,24 @@ app.get('/manager',checkAuthenticated, checkAdmin,(req,res)=>{
 })
 //send whole inventory to browser 
 app.get('/items',(req,res)=>{
-    var li 
+    var li
     const all_items = item.find({}).then((items)=>{
         li = items
          
         // console.log(li[0].name)
         res.send({
             items:li
+        })
+    })
+}) 
+app.get('/chart',(req,res)=>{
+    var lis
+    const all_charts = charts.find({}).then((chart)=>{
+        lis = chart
+         
+        // console.log(lis[0])
+        res.send({
+            chart:lis
         })
     })
 }) 
