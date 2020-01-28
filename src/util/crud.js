@@ -3,6 +3,7 @@ const user = require('../models/user')
 const chart = require('../models/chart')
 const nodemailer = require('nodemailer');
 const email = require('./email')
+const schedule = require('node-schedule');
 require('../db/mongoose')
 
 const add_chart = (des,nam,quanity,min,max,date)=>{
@@ -24,6 +25,22 @@ const add_chart = (des,nam,quanity,min,max,date)=>{
     })
 }
 let d = new Date();
+  schedule.scheduleJob('0 0 * * *', () => { 
+    item.find({}).then((items)=>{
+        items.forEach(element => {
+            add_chart(element.desc,element.name,element.quanity,element.min,element.max,d);
+        });
+    })
+   })
+ 
+//   schedule.scheduleJob('38 15 * * *', () => { 
+//     item.find({}).then((items)=>{
+//                     items.forEach(element => {
+//                         add_chart(element.desc,element.name,element.quanity,element.min,element.max,d);
+//                     });
+//                 })
+//   })
+
 
 const add_user = (name,admin,pass)=>{
     name.toLowerCase()

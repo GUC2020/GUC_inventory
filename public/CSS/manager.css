@@ -23,10 +23,11 @@ body{
 }
 .item{
     cursor: pointer;
-    width: 100px;
+    min-width: 120px;
     color: #4B382A;
     background-color:rgb(254, 197, 82);
-    padding: 0;
+    padding-right: 10;
+    padding-left: 10;
 }
 .options{
     background-color:rgb(254, 197, 82);
@@ -65,6 +66,7 @@ h3{
     float: left;
     width: 100%;
     background-color: rgba(245, 245, 245) ;
+    padding-top: 20px;
 }
 .grid{
     display: inline-flex;
@@ -82,12 +84,14 @@ input{
     margin-top: 15px;;
 }
 .update{
-    
+    justify-content: center;
     align-content: center;
 }
 p{
     display: inline-block;
-    width: 100px;
+    min-width: 100px;
+    margin-right: 10px;
+    text-align: center;
 }
 
 
@@ -107,9 +111,10 @@ p{
     background-color: transparent;
     border:#4B382A solid 1px;
     color: #4B382A;
-    height: 20px;
-    width: 50px;
-    font-size: 10px;
+    height: 25px;
+    width: 55px;
+    font-size: 13px;
+    text-align: center;
 }
 button:hover{
     cursor: pointer;
@@ -127,7 +132,10 @@ button:hover{
     position: relative;
 }
 .two,.three,.four{
-    width: 50px;
+    min-width: 10px;
+    text-align: center;
+    border: none;
+    margin-right: 5px;
 }
 .delete:hover{
     cursor: pointer;
@@ -138,14 +146,34 @@ button:hover{
     margin: 0 auto;
     background-color: rgba(245, 245, 245);
     margin-top: 20px;
+    display: flex;
+    flex-flow: column;
+    align-content: center;
+    justify-content: center;
     
+}
+.cre_contain>h1{
+    text-align: center;
 }
 #add{
     padding: 20px;
+    justify-content: center;
+    align-content: center;
+    display: flex;
+    flex-direction: row;
 }
 #add>input{
     width: 100px;
 }
-#add>h1{
-    padding
+.item>h3{
+    min-width: 100px;
+}
+
+
+/* ipad */
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px)
+and (-webkit-min-device-pixel-ratio: 2) { 
+    
 }

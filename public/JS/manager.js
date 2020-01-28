@@ -113,19 +113,14 @@ $(document).ready(function () {
                         all_chart =[]
                         dates=[]
                         chart_quan=[]
+                        console.log(data.chart)
                         for(i=0;i<data.chart.length;i++){
                             if(data.chart[i].name==selected_name[0].label && data.chart[i].desc==selected_option[0].label){
                                 all_chart.push(data.chart[i])
                             }
                         }
                         console.log(all_chart)
-                        for(i=0;i<data.chart.length;i++){
-                            console.log(data.chart[i].name)
-                            if(data.chart[i].name==selected_name[0].label && data.chart[i].desc==selected_option[0].label){
-                                console.log('worked')
-                                all_chart.push(data.chart[i])
-                            }
-                        }
+                        
                         for(i=0;i<all_chart.length;i++){
                             dates.push(all_chart[i].date)
                             chart_quan.push(all_chart[i].quanity)
@@ -157,9 +152,13 @@ $(document).ready(function () {
                         itemChart.config.data.datasets[0].label = selected_name[0].label
                         itemChart.update();
                     });
+                }).catch((error)=>{
+                    console.log(error)
                 })
             })
         })
+    }).catch((error)=>{
+        console.log(error)
     })
     setTimeout(function () {
         var acc = document.getElementsByClassName("item");
@@ -195,6 +194,18 @@ $(document).ready(function () {
                                 'max-height': panel[i].scrollHeight
                             })
                         })
+                        $(window).on('resize', function(){
+                            console.log('worked')
+                            for (i = 0; i < panel.length; i++) {
+                            $(panel).each(function () {
+                                $(this).css({
+                                    'max-height': panel[i].scrollHeight
+                                })
+                            })
+                        }
+                      });
+                            
+                        
                     }
                 }
 
