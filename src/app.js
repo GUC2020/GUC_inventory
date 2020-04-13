@@ -29,7 +29,7 @@ const methodOverride = require('method-override')
 const initializePassport = require('./passport-config')
 let users   
 setInterval(() => {
-    user.find({}).then(async (items)=>{
+    user.find({}).then(async (items)=>{ 
         users = items
     })
 }, 5000);

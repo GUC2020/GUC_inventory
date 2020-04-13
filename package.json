@@ -9,7 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "bcrypt": "^3.0.7",
+    "bcrypt": "^3.0.8",
     "express": "^4.17.1",
     "express-flash": "0.0.2",
     "express-session": "^1.17.0",
@@ -27,6 +27,6 @@
   },
   "devDependencies": {
     "dotenv": "^8.2.0",
-    "nodemon": "^2.0.2"
+    "nodemon": "^2.0.3"
   }
 }
