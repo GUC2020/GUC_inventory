@@ -28,6 +28,8 @@ const session = require('express-session')
 const methodOverride = require('method-override')
 const initializePassport = require('./passport-config')
 let users   
+
+// is it working?
 setInterval(() => {
     user.find({}).then(async (items)=>{ 
         users = items
