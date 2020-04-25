@@ -34,7 +34,6 @@ fetch('/items').then((response)=>{
                 }
         }
         $('.select_choice option').each(function(){
-            console.log('hi')
             if($(this).is(':selected')){
                 let curr_select = this;
                 $('.grid_mobile').children().each(function(){

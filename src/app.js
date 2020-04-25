@@ -102,6 +102,14 @@ app.get('/items',(req,res)=>{
         })
     })
 }) 
+app.get('/users',(req,res)=>{
+    let all_user
+    const all_users = user.find({}).then((user)=>{
+        res.send({
+            user
+        })
+    })
+}) 
 app.get('/chart',(req,res)=>{
     var lis
     const all_charts = charts.find({}).then((chart)=>{
@@ -160,7 +168,6 @@ app.post('/register', checkAuthenticated,checkAdmin, async (req, res) => {
           admin = true
       }
       create.add_user(req.body.name.toLowerCase(), admin, hashedPassword)
-      res.redirect('/login')
     } catch {
       res.redirect('/register')
     }
