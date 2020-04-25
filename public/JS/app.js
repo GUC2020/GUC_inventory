@@ -20,14 +20,75 @@ fetch('/items').then((response)=>{
         for(i=0; i < all.length;i++){
             $(".options").append("<div class='"+all[i]+" item'><h3>"+all[i]+"</h3></div>");
             $(".grid").append("<div class='item_container ind_"+all[i]+"'></div>")
+            $(".select_choice").append("<option value='" + all[i] + " item'>" + all[i] + "</option>");
             for(j = 0; j < data.items.length; j++){
                 if(data.items[j].desc === all[i]){
                     $(".ind_"+all[i]).append("<div class='info'><p>"+data.items[j].name+" </p><p> quanity: "+data.items[j].quanity+"</p>"+"<p style='display:none'>"+data.items[j].name+"</p><p style='display:none'>"+data.items[j].desc+'<form class="update"> <input class="two"type="number"placeholder="quantity"><button>Update</button></form></div>');
                 }
             }
+            $(".grid_mobile").append("<div class='hide mobile_item_container ind_" + all[i] + "'></div>")
+                for (j = 0; j < data.items.length; j++) {
+                    if (data.items[j].desc === all[i]) {
+                        $(".ind_" + all[i]).append("<div class='info'><p>"+data.items[j].name+" </p><p> quanity: "+data.items[j].quanity+"</p>"+"<p style='display:none'>"+data.items[j].name+"</p><p style='display:none'>"+data.items[j].desc+'<form class="update"> <input class="two"type="number"placeholder="quantity"><button>Update</button></form></div>');
+                    }
+                }
+        }
+        $('.select_choice option').each(function(){
+            console.log('hi')
+            if($(this).is(':selected')){
+                let curr_select = this;
+                $('.grid_mobile').children().each(function(){
+                    console.log('ind_'+curr_select.textContent)
+                    if($(this).hasClass('ind_'+curr_select.textContent) ){
+                     $(this).removeClass('hide')
+                    }
+                    else{
+                     $(this).addClass('hide')
+                    }
+                })
+            }
+        })
+    })
+    
+            
+        
+    
+
+
+$('.select_choice').change(function(){
+    $('.select_type option').each(function(){
+        let curr_type = this.textContent;
+        if($(this).is(':selected')){
+            if(curr_type == 'Stock'){
+                $('.select_choice option').each(function(){
+                    if($(this).is(':selected')){
+                        let curr_select = this;
+                        $('.grid_mobile').children().each(function(){
+                            if($(this).hasClass('ind_'+curr_select.textContent) ){
+                             $(this).removeClass('hide')
+                            }
+                            else{
+                             $(this).addClass('hide')
+                            }
+                        })
+                    }
+                })
+            }
+            if(curr_type == 'Analytics'){
+                $('.grid_mobile').children().each(function(){
+                     $(this).addClass('hide');
+                     if($(this).hasClass('mobile_container')||$(this).hasClass('mobile_name')){
+                         $(this).removeClass('hide');
+                     }
+                })
+            }
         }
     })
+    
 })
+
+
+
 setTimeout(function(){
     var acc = document.getElementsByClassName("item");
     var i;
@@ -89,4 +150,26 @@ setTimeout(function(){
     }
 },1000)
 
+
+
+    //resolution changes
+    let width = $(window).width();
+    if(width <= 768){
+        $(' .main-content, .big').addClass('hide');
+    }else{
+        $('.nav_bar, .select_menu, grid_mobile').addClass('hide');
+    }
+    
+    $( window ).resize(function() {
+        width = $(window).width();
+        if(width <= 768){
+            $(' .main-content, .big').addClass('hide');
+            $('.nav_bar, .select_menu, grid_mobile').removeClass('hide');
+        }
+        else{
+            $('.main-content, .big').removeClass('hide');
+            $('.nav_bar, .select_menu, grid_mobile').addClass('hide');
+        }
+    });
+})
 })

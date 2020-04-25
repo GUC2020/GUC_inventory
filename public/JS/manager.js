@@ -28,19 +28,116 @@ $(document).ready(function () {
             for (i = 0; i < all.length; i++) {
                 $(".type").append("<option value='" + all[i] + "'>" + all[i] + "</option>");
                 $(".options").append("<div class='" + all[i] + " item'><h3>" + all[i] + "</h3></div>");
+                $(".select_choice").append("<option value='" + all[i] + " item'>" + all[i] + "</option>");
                 $(".grid").append("<div class='item_container ind_" + all[i] + "'></div>")
                 for (j = 0; j < data.items.length; j++) {
                     if (data.items[j].desc === all[i]) {
                         $(".ind_" + all[i]).append("<div class='info'><div class='delete'>X</div><p>" + data.items[j].name + " </p><p> quanity: " + data.items[j].quanity + "</p><p>min: " + data.items[j].min + "</p><p>max: " + data.items[j].max + "</p><p style='display:none'>" + data.items[j].name + "</p><p style='display:none'>" + data.items[j].desc + '<form class="update"> <input class="two"type="number"placeholder="quantity"><input class="three"type="number"placeholder="min"><input class="four"type="number"placeholder="max"><button class="ups">Update</button></form></div>');
                     }
                 }
+
+                $(".grid_mobile").append("<div class='hide mobile_item_container Mind_" + all[i] + "'></div>")
+                for (j = 0; j < data.items.length; j++) {
+                    if (data.items[j].desc === all[i]) {
+                        $(".Mind_" + all[i]).append("<div class='mobile_info'><p>" + data.items[j].name + " </p> " +  '<form class="mobile_update"> <label for="mobile_quanity"class="two_lab">Quanity:    </label><input id="mobile_quanity"class="two mob_in"type="number"placeholder="'+data.items[j].quanity +'"><label for="mobile_min" class="three_lab">Min: </label><input class="three mob_in"type="number"placeholder="'+data.items[j].min+'"><label for="mobile_max"class="four_lab">Max: </label><input class="four mob_in"type="number"placeholder="'+data.items[j].max+'"><button class="ups">Update</button></form></div>');
+                    }
+                }
             }
+            $('.select_type option').each(function(){
+                let curr_type = this.textContent;
+                console.log(curr_type)
+                if(curr_type == 'Stock'){
+                    $('.select_choice option').each(function(){
+                        if($(this).is(':selected')){
+                            let curr_select = this;
+                            $('.grid_mobile').children().each(function(){
+                                if($(this).hasClass('Mind_'+curr_select.textContent) ){
+                                 $(this).removeClass('hide')
+                                }
+                                else{
+                                 $(this).addClass('hide')
+                                }
+                            })
+                        }
+                    })
+                }
+            })
+
+            $('.select_type').change(function(){
+                $('.select_type option').each(function(){
+                    let curr_type = this.textContent;
+                    if($(this).is(':selected')){
+                        if(curr_type == 'Stock'){
+                            $('.select_choice option').each(function(){
+                                if($(this).is(':selected')){
+                                    let curr_select = this;
+                                    $('.grid_mobile').children().each(function(){
+                                        if($(this).hasClass('Mind_'+curr_select.textContent) ){
+                                         $(this).removeClass('hide')
+                                        }
+                                        else{
+                                         $(this).addClass('hide')
+                                        }
+                                    })
+                                }
+                            })
+                        }
+                        if(curr_type == 'Analytics'){
+                            $('.grid_mobile').children().each(function(){
+                                 $(this).addClass('hide');
+                                 if($(this).hasClass('mobile_container')||$(this).hasClass('mobile_name')){
+                                     $(this).removeClass('hide');
+                                 }
+                            })
+                        }
+                    }
+                })
+            })
+
+
+            $('.select_choice').change(function(){
+                $('.select_type option').each(function(){
+                    let curr_type = this.textContent;
+                    if($(this).is(':selected')){
+                        if(curr_type == 'Stock'){
+                            $('.select_choice option').each(function(){
+                                if($(this).is(':selected')){
+                                    let curr_select = this;
+                                    $('.grid_mobile').children().each(function(){
+                                        if($(this).hasClass('Mind_'+curr_select.textContent) ){
+                                         $(this).removeClass('hide')
+                                        }
+                                        else{
+                                         $(this).addClass('hide')
+                                        }
+                                    })
+                                }
+                            })
+                        }
+                        if(curr_type == 'Analytics'){
+                            $('.grid_mobile').children().each(function(){
+                                 $(this).addClass('hide');
+                                 if($(this).hasClass('mobile_container')||$(this).hasClass('mobile_name')){
+                                     $(this).removeClass('hide');
+                                 }
+                            })
+                        }
+                    }
+                })
+                
+            })
+
+
+
+
+
+
+
+
             let selected_option = $('.type option:selected')
-            // console.log(selected_option[0].label)
-            // console.log(all_items)
             for (j = 0; j < all_items.length; j++) {
                 if (all_items[j].desc == selected_option[0].label) {
-                    $(".name").append("<option value='" + all_items[j].name + "'>" + all_items[j].name + "</option>");
+                    $(".name , .mobile_name").append("<option value='" + all_items[j].name + "'>" + all_items[j].name + "</option>");
                 }
             }
             fetch('/chart').then((response) => {
@@ -48,7 +145,6 @@ $(document).ready(function () {
                         
                     
                     let selected_name = $('.name option:selected')
-                    console.log(data.chart)
                     for(i=0;i<data.chart.length;i++){
                         if(data.chart[i].name==selected_name[0].label && data.chart[i].desc==selected_option[0].label){
                             all_chart.push(data.chart[i])
@@ -59,10 +155,12 @@ $(document).ready(function () {
                     let chart_quan = []
                     
                     for(i=0;i<all_chart.length;i++){
-                        dates.push(all_chart[i].date)
+                        let parse_date = all_chart[i].date.split('T');
+                        dates.push(parse_date[0])
                         chart_quan.push(all_chart[i].quanity)
                     }
-
+                    chart_quan.splice(0,chart_quan.length - 10)
+                    dates.splice(0,dates.length - 10)
                     let myChart = document.getElementById('myChart').getContext('2d');
                     let itemChart = new Chart(myChart, {
                         
@@ -74,6 +172,13 @@ $(document).ready(function () {
                                 data: chart_quan
                             }]
                         },
+                        xAxes: [{
+                            type: 'time',
+                            ticks: {
+                                autoSkip: true,
+                                maxTicksLimit: 10
+                            }
+                        }],
                         options: {
                             responsive: true,
                             legend: {
@@ -97,11 +202,68 @@ $(document).ready(function () {
                             }
                         }
                     });
+                    // 
+                    // 
+                    // //////////////////////////////////////////////////////////////////////
+                    let myMobileChart = document.getElementById('myMobileChart').getContext('2d');
+                    let itemMobileChart = new Chart(myMobileChart, {
+                        
+                        type: 'line', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+                        data: {
+                            labels: dates,
+                            datasets: [{
+                                label: selected_name[0].label,
+                                data: chart_quan
+                            }]
+                        },
+                        xAxes: [{
+                            type: 'time',
+                            ticks: {
+                                autoSkip: true,
+                                maxTicksLimit: 10
+                            }
+                        }],
+                        options: {
+                            responsive: true,
+                            legend: {
+                                display: false
+                            },
+                            title: {
+                                display: false,
+                                text: 'Chart.js bar Chart'
+                            },
+                            animation: {
+                                animateScale: true
+                            },
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero: true,
+                                        callback: function (value) { if (Number.isInteger(value)) { return value; } },
+                                        stepSize: 1
+                                    }
+                                }]
+                            }
+                        }
+                    });
+
+
+
+
+
+
+
+
+
+
+
+
+                    // ///////////////////////////////////////////////////////////////////////
+                    // 
                     $('.type').change(function () {
                         
                         selected_option = $('.type option:selected')
                         $(".name").empty();
-                        console.log(selected_option[0].label)
                         for (j = 0; j < all_items.length; j++) {
                             if (all_items[j].desc == selected_option[0].label) {
                                 $(".name").append("<option value='" + all_items[j].name + "'>" + all_items[j].name + "</option>");
@@ -113,18 +275,20 @@ $(document).ready(function () {
                         all_chart =[]
                         dates=[]
                         chart_quan=[]
-                        console.log(data.chart)
                         for(i=0;i<data.chart.length;i++){
                             if(data.chart[i].name==selected_name[0].label && data.chart[i].desc==selected_option[0].label){
                                 all_chart.push(data.chart[i])
                             }
                         }
-                        console.log(all_chart)
                         
                         for(i=0;i<all_chart.length;i++){
-                            dates.push(all_chart[i].date)
+                            let parse_date = all_chart[i].date.split('T');
+                            dates.push(parse_date[0])
                             chart_quan.push(all_chart[i].quanity)
                         }
+                        chart_quan.splice(0,chart_quan.length - 10)
+                        dates.splice(0,dates.length - 10)
+
                         itemChart.config.data.labels = dates
                         itemChart.config.data.datasets[0].data = chart_quan
                         itemChart.config.data.datasets[0].label = selected_name[0].label
@@ -142,15 +306,102 @@ $(document).ready(function () {
                         }
 
                         for(i=0;i<all_chart.length;i++){
-                            dates.push(all_chart[i].date)
+                            let parse_date = all_chart[i].date.split('T');
+                            dates.push(parse_date[0])
                             chart_quan.push(all_chart[i].quanity)
                         }
-                        console.log(itemChart)
-                        // console.log(itemChart.config.data.datasets[0].label)
                         itemChart.config.data.labels = dates
                         itemChart.config.data.datasets[0].data = chart_quan
                         itemChart.config.data.datasets[0].label = selected_name[0].label
                         itemChart.update();
+                    });
+
+                    $('.select_choice').change(function(){
+                        $('.select_type option').each(function(){
+                            let curr_type = this.textContent;
+                            if($(this).is(':selected')){
+                                if(curr_type == 'Stock'){
+                                    $('.select_choice option').each(function(){
+                                        if($(this).is(':selected')){
+                                            let curr_select = this;
+                                            $('.grid_mobile').children().each(function(){
+                                                if($(this).hasClass('Mind_'+curr_select.textContent) ){
+                                                 $(this).removeClass('hide')
+                                                }
+                                                else{
+                                                 $(this).addClass('hide')
+                                                }
+                                            })
+                                        }
+                                    })
+                                }
+                                if(curr_type == 'Analytics'){
+                                    $('.grid_mobile').children().each(function(){
+                                         $(this).addClass('hide');
+                                         if($(this).hasClass('mobile_container')||$(this).hasClass('mobile_name')){
+                                             $(this).removeClass('hide');
+                                         }
+                                    })
+                                
+                                        selected_option = $('.select_choice option:selected')
+                                        $(".mobile_name").empty();
+                                        for (j = 0; j < all_items.length; j++) {
+                                            if (all_items[j].desc == selected_option[0].label) {
+                                                $(".mobile_name").append("<option value='" + all_items[j].name + "'>" + all_items[j].name + "</option>");
+                                            }
+                                        }
+                                        selected_name = $('.mobile_name option:selected')
+                                        
+                                        
+                                        all_chart =[]
+                                        dates=[]
+                                        chart_quan=[]
+                                        for(i=0;i<data.chart.length;i++){
+                                            if(data.chart[i].name==selected_name[0].label && data.chart[i].desc==selected_option[0].label){
+                                                all_chart.push(data.chart[i])
+                                            }
+                                        }
+                                        
+                                        for(i=0;i<all_chart.length;i++){
+                                            let parse_date = all_chart[i].date.split('T');
+                                            dates.push(parse_date[0])
+                                            chart_quan.push(all_chart[i].quanity)
+                                        }
+
+                                        chart_quan.splice(0,chart_quan.length - 10)
+                                        dates.splice(0,dates.length - 10)
+                                        itemMobileChart.config.data.labels = dates
+                                        itemMobileChart.config.data.datasets[0].data = chart_quan
+                                        itemMobileChart.config.data.datasets[0].label = selected_name[0].label
+                                        itemMobileChart.update();
+                                   
+                                }
+                            }
+                        })
+                        
+                    })
+                    $('.mobile_name').change(function () {
+                        selected_name = $('.mobile_name option:selected')
+                        all_chart =[]
+                        dates=[]
+                        chart_quan=[]
+                        for(i=0;i<data.chart.length;i++){
+                            if(data.chart[i].name==selected_name[0].label && data.chart[i].desc==selected_option[0].label){
+                                all_chart.push(data.chart[i])
+                            }
+                        }
+
+                        for(i=0;i<all_chart.length;i++){
+                            let parse_date = all_chart[i].date.split('T');
+                            dates.push(parse_date[0])
+                            chart_quan.push(all_chart[i].quanity)
+                        }
+                        chart_quan.splice(0,chart_quan.length - 10)
+                        dates.splice(0,dates.length - 10)
+                        itemMobileChart.config.data.labels = dates
+                        itemMobileChart.config.data.datasets[0].data = chart_quan
+                        itemMobileChart.config.data.datasets[0].label = selected_name[0].label
+                        itemMobileChart.update();
                     });
                 }).catch((error)=>{
                     console.log(error)
@@ -165,7 +416,6 @@ $(document).ready(function () {
         var i;
 
         for (i = 0; i < acc.length; i++) {
-            console.log('added')
             acc[i].addEventListener("click", function () {
                 /* Toggle between adding and removing the "active" class,
                 to highlight the button that controls the panel */
@@ -195,7 +445,6 @@ $(document).ready(function () {
                             })
                         })
                         $(window).on('resize', function(){
-                            console.log('worked')
                             for (i = 0; i < panel.length; i++) {
                             $(panel).each(function () {
                                 $(this).css({
@@ -227,25 +476,21 @@ $(document).ready(function () {
         for (let i = 0; i < updateForm.length; i++) {
             updateForm[i].addEventListener('submit', (e) => {
                 e.preventDefault()
-                // console.log('hi')
                 const name1 = updateForm[i].previousSibling.previousSibling.textContent
                 const desc1 = updateForm[i].previousSibling.textContent
                 let curr_quan = updateForm[i].previousSibling.previousSibling.previousSibling.textContent
                 curr_quan = curr_quan.split(" ").pop();
-                console.log(curr_quan)
                 const quanity1 = quanity[i].value
                 const min1 = min[i].value
                 const max1 = max[i].value
                 if (min1 > Number(curr_quan)) {
-                    return console.log('its a no from me dog')
+                    return 
                 }
                 if (max1 != '') {
                     if (min1 > max1) {
-                        return console.log('its a no go from me')
+                        return 
                     }
                 }
-
-                console.log(quanity1)
                 fetch('/update_full?name=' + name1 + '&quanity=' + quanity1 + '&desc=' + desc1 + '&min=' + min1 + '&max=' + max1).then((response) => {
                     response.json().then((data) => {
 
@@ -269,7 +514,6 @@ $(document).ready(function () {
     }, 1000)
     addForm.addEventListener('submit', (e) => {
         e.preventDefault()
-        // console.log('hi')
         const des = desc.value
         const na = nam.value
         const qua = quan.value
@@ -283,14 +527,12 @@ $(document).ready(function () {
         const curr_delete = document.getElementsByClassName('delete')
         for (i = 0; i < curr_delete.length; i++) {
             $(curr_delete[i]).click(function () {
-                console.log($(this).parent())
                 $(this).parent().css({
                     'max-height': 0,
                     'display': 'none'
                 })
                 const na = this.nextSibling.textContent
                 const des = this.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.textContent
-                console.log(des)
                 fetch('/delete?desc=' + des + '&nam=' + na).then((response) => {
                     response.json().then((data) => {})
                 })
@@ -315,20 +557,17 @@ $(document).ready(function () {
                     const desc1 = updateForm[i].previousSibling.textContent
                     let curr_quan = updateForm[i].previousSibling.previousSibling.previousSibling.textContent
                     curr_quan = curr_quan.split(" ").pop();
-                    console.log(curr_quan)
                     const quanity1 = quanity[i].value
                     const min1 = min[i].value
                     const max1 = max[i].value
                     if (min1 > Number(curr_quan)) {
-                        return console.log('its a no from me dog')
+                        return 
                     }
                     if (max1 != '') {
                         if (min1 > max1) {
-                            return console.log('its a no go from me')
+                            return 
                         }
                     }
-
-                    console.log(quanity1)
                     fetch('/update_full?name=' + name1 + '&quanity=' + quanity1 + '&desc=' + desc1 + '&min=' + min1 + '&max=' + max1)
 
                     const quan_chan = updateForm[i].previousSibling.previousSibling.previousSibling.previousSibling.previousSibling
@@ -350,7 +589,7 @@ $(document).ready(function () {
             setTimeout(function () {
                 location.reload()
             }, 2000);
-            return console.log('done')
+            return 
 
         }, 2000)
     }
@@ -361,4 +600,40 @@ $(document).ready(function () {
             up_all()
         });
     }, 1000)
+
+
+
+    //create new mobile exit
+
+    $('.close').on('click',function(){
+        $('.cre_contain').addClass('hide');
+    })
+    $('.new').on('click',function(){
+        $('.cre_contain').removeClass('hide');
+    })
+    //resolution changes
+    let width = $(window).width();
+    if(width <= 768){
+        $('.container, .main-content , .big').addClass('hide');
+        $('.nav_bar , .grid_mobile, .select_menu').removeClass('hide');
+    }else{
+        $('.container, .main-content , .big').removeClass('hide');
+        $('.nav_bar , .grid_mobile, .select_menu').addClass('hide');
+    }
+    
+    $( window ).resize(function() {
+        console.log('small')
+        width = $(window).width();
+        if(width <= 768){
+            
+            $('.container , .main-content, .big').addClass('hide');
+            $('.nav_bar , .grid_mobile, .select_menu').removeClass('hide');
+            
+        }
+        else{
+            $('.nav_bar , .grid_mobile, .select_menu').addClass('hide');
+            $('.container, .main-content, .big').removeClass('hide');
+            
+        }
+    });
 })

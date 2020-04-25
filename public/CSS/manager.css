@@ -1,7 +1,7 @@
 
 
 body{
-    background-color:  rgba(223, 223, 223, 0.849);
+    background-color:  rgba(223, 223, 223, 0.849)!important;
     width: 100vw;
     height: 100vh;
     position: absolute;
@@ -168,12 +168,205 @@ button:hover{
 .item>h3{
     min-width: 100px;
 }
+.hide{
+    display: none;
+}
 
 
-/* ipad */
+/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+/* Smaller Screens */
 @media only screen 
-and (min-device-width : 768px) 
-and (max-device-width : 1024px)
-and (-webkit-min-device-pixel-ratio: 2) { 
+and (max-width : 768px)  { 
+   .nav_bar{
+       display: flex;
+       flex-direction: row;
+       justify-content: flex-end;
+       flex-wrap: nowrap;
+       background-color:#BA6C1D;
+       height: 70px;
+       width: 100vw;
+   }
+   .logout{
+    position: relative;
+    background-color: white;
+    border:#4B382A solid 1px;
+    color: #4B382A;
+    height: 50px;
+    width: 100px;
+    font-size: 20px;
+    margin: 10;
+   }
+   .new{
+    position: relative;
+    background-color: white;
+    border:#4B382A solid 1px;
+    color: #4B382A;
+    height: 50px;
+    width: 100px;
+    font-size: 20px;
+    margin: 10px;
+   }
+   .select_menu{
+       height: 200px;
+       background-color: rgb(254, 197, 82);
+       display: flex;
+       flex-direction: row;
+   }
+   .select_type_form, .select_choice_form{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+   }
+   .select_type, .select_choice{
+    border:none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    -ms-appearance: none; 
+    background-color: transparent;
+    color: #4B382A ;
+    font-weight: bold;
+    font-size: 50px;
+    text-align: center;
+    width: fit-content;
+   }
+   .select_item{
+       height: 100%;
+       width: 100%;
+   }
+   option{
+    background-color: rgb(254, 197, 82);
+   }
+
+   .grid_mobile{
+       height: fit-content;
+   }
+   .mobile_info{
+       display: flex;
+       flex-wrap: nowrap;
+       flex-direction: row;
+       justify-content: center;
+       align-items: center;
+       margin-top: 50px;
+   }
+   .mobile_info p{
+       margin: 10px;
+       font-weight: bold;
+       font-size: 30px;
+       display: inline-block;
+       width: 200px;
+   }
+   .mobile_update{
+       display: grid;
+       grid-template-columns:  1fr 1fr 1fr 1fr 1fr;
+       grid-template-rows: 1fr 1fr;
+       grid-template-areas: 
+       "quan quan quanL none button"
+       "minL min maxL max . ";
+   }
+   .mobile_update .two {
+       grid-area: quanL;
+   }
+   .mobile_update .two_lab{
+    grid-area: quan;
+    text-align: end;
+    font-size: 30px;
+}
+   .mobile_update .three{
     
+    grid-area: min;
+   }
+   .mobile_update .three_lab{
+    text-align: end;
+    grid-area: minL;
+    font-size: 25px;
+   }
+   .mobile_update .four {
+    grid-area: max;
+   }
+   .mobile_update .four_lab{
+    grid-area: maxL;
+    text-align: end;
+    font-size: 25px;
+   }
+   .mob_in{
+       width: 50px;
+   }
+   .ups{
+       grid-area: button;
+   }
+   input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+
+    .cre_contain{
+        background-color: white;
+        height: 100vh;
+        width: 100vw;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 20;
+        margin: 0;
+        justify-content: start;
+    }
+    .cre_contain h1{
+        margin-top: 100px;
+    }
+    #add{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    #desc,#nam,#quan,#min,#max{
+        width: 80% !important;
+        height: 40px;
+        margin: 20px;
+    }
+    #add button{
+            position: relative;
+            background-color: white;
+            border:#4B382A solid 1px;
+            color: #4B382A;
+            height: 50px;
+            width: 100px;
+            font-size: 20px;
+            margin: 10px;
+    }
+    .close {
+        position: absolute;
+        right: 32px;
+        top: 32px;
+        width: 32px;
+        height: 32px;
+        opacity: 0.3;
+      }
+      .close:hover {
+        opacity: 1;
+      }
+      .close:before, .close:after {
+        position: absolute;
+        left: 15px;
+        content: ' ';
+        height: 33px;
+        width: 2px;
+        background-color: #333;
+      }
+      .close:before {
+        transform: rotate(45deg);
+      }
+      .close:after {
+        transform: rotate(-45deg);
+      }
 }

@@ -9,7 +9,7 @@ const path = require('path')
 const express = require('express')
 //initizalize express
 const app = express()
-//hbs for viewport (i.e. it is the equivilant to what php when displaying html)
+//hbs for viewport (i.e. it is the equivilant to what php does when displaying html)
 const hbs = require('hbs')
 //connecting to database
 require('./db/mongoose')
@@ -29,14 +29,12 @@ const methodOverride = require('method-override')
 const initializePassport = require('./passport-config')
 let users   
 
-// is it working?
 setInterval(() => {
     user.find({}).then(async (items)=>{ 
         users = items
     })
 }, 5000);
 
-// setTimeout(function(){console.log(users)},2000)
 setTimeout(function(){
     initializePassport(
         passport, 
@@ -99,8 +97,6 @@ app.get('/items',(req,res)=>{
     var li
     const all_items = item.find({}).then((items)=>{
         li = items
-         
-        // console.log(li[0].name)
         res.send({
             items:li
         })
@@ -110,8 +106,6 @@ app.get('/chart',(req,res)=>{
     var lis
     const all_charts = charts.find({}).then((chart)=>{
         lis = chart
-         
-        // console.log(lis[0])
         res.send({
             chart:lis
         })
@@ -124,7 +118,6 @@ app.get('/delete',(req,res)=>{
         })
     }
     create.delete_item(req.query.nam,req.query.desc)
-    console.log("it's dead")
     
 })
 app.get('/create',(req,res)=>{
@@ -134,7 +127,6 @@ app.get('/create',(req,res)=>{
         })
     }
     create.add_item(req.query.desc,req.query.nam,req.query.quan,req.query.min,req.query.max)
-    console.log('thank god first Try')
 })
   
 app.get('/update',(req,res)=>{
@@ -144,7 +136,6 @@ app.get('/update',(req,res)=>{
         })
     }
     create.update_item(req.query.name,req.query.quanity,req.query.desc)
-    console.log('worked')
 })
 
 app.get('/update_full',(req,res)=>{
@@ -154,9 +145,7 @@ app.get('/update_full',(req,res)=>{
         })
     }
     create.update_all(req.query.name,req.query.quanity,req.query.desc,req.query.min,req.query.max)
-    console.log('worked')
     res.send({
-        li:'hi'
     })
 })
 app.get('/register', checkAuthenticated,checkAdmin, (req, res) => {
@@ -173,7 +162,6 @@ app.post('/register', checkAuthenticated,checkAdmin, async (req, res) => {
       create.add_user(req.body.name.toLowerCase(), admin, hashedPassword)
       res.redirect('/login')
     } catch {
-        console.log('nope')
       res.redirect('/register')
     }
 })

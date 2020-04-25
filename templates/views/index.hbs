@@ -8,7 +8,37 @@
         <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
     </head>
     <body>
-        <form class="logout_form" action="/logout?_method=DELETE" method="POST">
+        
+
+
+
+        <body>
+        <div class="nav_bar">
+            
+            <form class="logout_form" action="/logout?_method=DELETE" method="POST">
+                <button class = "logout"type="submit">Log Out</button>
+            </form>
+        </div>
+
+        <div class="select_menu">
+            <form class="select_type_form">
+                <select class="select_type" name="select_type" id="">
+                    <option value="Stock">Stock</option>
+                </select>
+            </form>
+            <form class="select_choice_form">
+                <select class="select_choice" name="select_choice" id="">
+                </select>
+            </form>
+        </div>
+
+        <div class="grid_mobile">
+
+        </div>
+
+
+        {{!-- full --}}
+        <form class="logout_form big" action="/logout?_method=DELETE" method="POST">
             <button class = "logout"type="submit">Log Out</button>
         </form>
         <div class="main-content">

@@ -11,9 +11,42 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     </head>
     <body>
-        <form class="logout_form" action="/logout?_method=DELETE" method="POST">
-            <button class = "logout"type="submit">Log Out</button>
-        </form>
+        <div class="nav_bar">
+            
+                <button class = "new">New</button>
+            
+            <form class="logout_form" action="/logout?_method=DELETE" method="POST">
+                <button class = "logout"type="submit">Log Out</button>
+            </form>
+        </div>
+
+        <div class="select_menu">
+            <form class="select_type_form">
+                <select class="select_type" name="select_type" id="">
+                    <option value="Stock">Stock</option>
+                    <option value="Analytics">Analytics</option>
+                </select>
+            </form>
+            <form class="select_choice_form">
+                <select class="select_choice" name="select_choice" id="">
+                </select>
+            </form>
+        </div>
+
+        <div class="grid_mobile">
+            <select class="mobile_name" name="mobile_name" id="">
+                </select>
+            <div class="mobile_container">
+                <canvas id="myMobileChart"></canvas>
+            </div>
+
+        </div>
+
+        
+        {{!-- full screen --}}
+        <form class="logout_form big" action="/logout?_method=DELETE" method="POST">
+                <button class = "logout"type="submit">Log Out</button>
+            </form>
             <div class="main-content">
                 <div class="options"></div>
                 <div class="grid"></div>
@@ -21,7 +54,8 @@
             </div>
 
             
-            <div class="cre_contain">
+            <div class="cre_contain hide">
+                <a href="#" class="close"></a>
                 <h1>Create New</h1>
                 <form id="add">
                     <input id="desc"placeholder="desc">
