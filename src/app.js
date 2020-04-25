@@ -145,7 +145,14 @@ app.get('/update',(req,res)=>{
     }
     create.update_item(req.query.name,req.query.quanity,req.query.desc)
 })
-
+app.get('/delete_user',(req,res)=>{
+    if(req.error){
+        return res.send({
+            error:'This is not a valid request.'
+        })
+    }
+    create.delete_user(req.query.name)
+})
 app.get('/update_full',(req,res)=>{
     if(req.error){
         return res.send({

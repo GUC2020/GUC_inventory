@@ -4,28 +4,44 @@
 <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
 
 
-<h1>Register</h1>
-<form action="/register" method="POST">
-  <div>
-    <label for="name">Name</label>
-    <input type="text" id="name" name="name" required>
-  </div>
-  <div>
-    <label for="admin">Admin</label>
-    <input type="checkbox" id="admin" name="admin" >
-  </div>
-  <div>
-    <label for="password">Password</label>
-    <input type="password" id="password" name="password" required>
-  </div>
-  <button type="submit">Register</button>
-</form>
-<div class="user_container">
-  <h1>Admins</h1>
-  <div class="admins"></div>
-  <h1>Users</h1>
-  <div class="normal"></div>
+
+<form class="logout_form big" action="/logout?_method=DELETE" method="POST">
+            <button class = "logout"type="submit">Log Out</button>
+        </form>
+        <form class="user_form" action="/manager" method="GET">
+            <button class = "home"type="submit">Home</button>
+        </form>
+<div class="create">
+  <h1 class="create_title">Create User</h1>
+  <form action="/register" method="POST">
+    <div>
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" required>
+    </div>
+    <div>
+      <label for="admin">Admin</label>
+      <input type="checkbox" id="admin" name="admin" >
+    </div>
+    <div>
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" required>
+    </div>
+    <button type="submit">Register</button>
+  </form>
 </div>
-<a href="/login">Login</a>
+<div class="user_container">
+  <div class="admin">
+    <h1>Admins</h1>
+    <div class="admins"></div>
+  </div>
+  <div class="users">
+    <h1>Users</h1>
+    <div class="normal"></div>
+  </div>
+</div>
+
+<div class="delete_form" style="display: none;">
+  
+</div>
 
 <script src="/JS/users.js"></script>

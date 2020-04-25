@@ -84,6 +84,11 @@ const delete_item = (name,desc)=>{
        return console.log(err)
    })
 }
+const delete_user = (name)=>{
+    user.deleteOne({name:name},(err)=>{
+        return console.log(err)
+    })
+ }
 const update_item = (name,quanity,desc)=>{
     if(!quanity){
         return console.log('no number inputed')
@@ -153,6 +158,7 @@ const update_item = (name,quanity,desc)=>{
 
 exports.add_user = add_user
 exports.find_user = find_user
+exports.delete_user = delete_user
 exports.add_item = add_item
 exports.delete_item = delete_item
 exports.update_item = update_item

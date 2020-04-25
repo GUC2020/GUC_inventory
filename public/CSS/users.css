@@ -1,0 +1,116 @@
+.close {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    opacity: 0.3;
+  }
+  .close:hover {
+    opacity: 1;
+  }
+  .close:before, .close:after {
+    position: absolute;
+    left: 0px;
+    content: ' ';
+    height: 18px;
+    width: 2px;
+    background-color: #333;
+  }
+  .close:before {
+    transform: rotate(45deg);
+  }
+  .close:after {
+    transform: rotate(-45deg);
+  }
+  .user{
+      display: flex;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      margin-bottom: 20px;
+  }
+  .name{
+      margin-left: 40px;
+  }
+  .user_container{
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+  }
+  .admin{
+
+  }
+  .users{
+      margin-left: 40px;
+  }
+  .create{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+  }
+  label{
+      display: inline-block;
+      width: 90px!important;
+  }
+  .create_title{
+      text-align: center;
+  }
+  .logout{
+    position: fixed;
+    right: 0;
+    background-color: transparent;
+    border:#4B382A solid 1px;
+    color: #4B382A;
+    height: 50px;
+    width: 100px;
+    font-size: 20px;
+    margin: 10px;
+}
+.home{
+    position: fixed;
+    right: 110px;
+    background-color: transparent;
+    border:#4B382A solid 1px;
+    color: #4B382A;
+    height: 50px;
+    width: 100px;
+    font-size: 20px;
+    margin: 10px;
+}
+button:hover{
+    cursor: pointer;
+    background-color: #4B382A;
+    color:rgb(254, 197, 82);
+}
+.delete_form{
+    height: 100vh;
+    width: 100vw;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 5;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+span{
+    font-weight: bold;
+}
+.delete_form p{
+    font-size: 40px;
+    text-align: center;
+}
+.delete_form button{
+    height: 80px;
+    width: 160px;
+    margin: 40px;
+}
+.answer{
+   display: flex;
+   flex-direction: row;
+   flex-wrap: wrap; 
+   justify-content: center;
+}
