@@ -26,10 +26,10 @@ fetch('/items').then((response)=>{
                     $(".ind_"+all[i]).append("<div class='info'><p>"+data.items[j].name+" </p><p> quanity: "+data.items[j].quanity+"</p>"+"<p style='display:none'>"+data.items[j].name+"</p><p style='display:none'>"+data.items[j].desc+'<form class="update"> <input class="two"type="number"placeholder="quantity"><button>Update</button></form></div>');
                 }
             }
-            $(".grid_mobile").append("<div class='hide mobile_item_container ind_" + all[i] + "'></div>")
+            $(".grid_mobile").append("<div class='hide mobile_item_container Mind_" + all[i] + "'></div>")
                 for (j = 0; j < data.items.length; j++) {
                     if (data.items[j].desc === all[i]) {
-                        $(".ind_" + all[i]).append("<div class='info'><p>"+data.items[j].name+" </p><p> quanity: "+data.items[j].quanity+"</p>"+"<p style='display:none'>"+data.items[j].name+"</p><p style='display:none'>"+data.items[j].desc+'<form class="update"> <input class="two"type="number"placeholder="quantity"><button>Update</button></form></div>');
+                        $(".Mind_" + all[i]).append("<div class='info'><p>"+data.items[j].name+" </p><p> quanity: "+data.items[j].quanity+"</p>"+"<p style='display:none'>"+data.items[j].name+"</p><p style='display:none'>"+data.items[j].desc+'<form class="update"> <input class="two"type="number"placeholder="quantity"><button>Update</button></form></div>');
                     }
                 }
         }
@@ -38,8 +38,8 @@ fetch('/items').then((response)=>{
             if($(this).is(':selected')){
                 let curr_select = this;
                 $('.grid_mobile').children().each(function(){
-                    console.log('ind_'+curr_select.textContent)
-                    if($(this).hasClass('ind_'+curr_select.textContent) ){
+                    console.log('Mind_'+curr_select.textContent)
+                    if($(this).hasClass('Mind_'+curr_select.textContent) ){
                      $(this).removeClass('hide')
                     }
                     else{
@@ -64,7 +64,7 @@ $('.select_choice').change(function(){
                     if($(this).is(':selected')){
                         let curr_select = this;
                         $('.grid_mobile').children().each(function(){
-                            if($(this).hasClass('ind_'+curr_select.textContent) ){
+                            if($(this).hasClass('Mind_'+curr_select.textContent) ){
                              $(this).removeClass('hide')
                             }
                             else{
@@ -157,18 +157,18 @@ setTimeout(function(){
     if(width <= 768){
         $(' .main-content, .big').addClass('hide');
     }else{
-        $('.nav_bar, .select_menu, grid_mobile').addClass('hide');
+        $('.nav_bar, .select_menu, .grid_mobile').addClass('hide');
     }
     
     $( window ).resize(function() {
         width = $(window).width();
         if(width <= 768){
             $(' .main-content, .big').addClass('hide');
-            $('.nav_bar, .select_menu, grid_mobile').removeClass('hide');
+            $('.nav_bar, .select_menu, .grid_mobile').removeClass('hide');
         }
         else{
             $('.main-content, .big').removeClass('hide');
-            $('.nav_bar, .select_menu, grid_mobile').addClass('hide');
+            $('.nav_bar, .select_menu, .grid_mobile').addClass('hide');
         }
     });
 })
