@@ -39,7 +39,7 @@ $(document).ready(function () {
                 $(".grid_mobile").append("<div class='hide mobile_item_container Mind_" + all[i] + "'></div>")
                 for (j = 0; j < data.items.length; j++) {
                     if (data.items[j].desc === all[i]) {
-                        $(".Mind_" + all[i]).append("<div class='mobile_info'><p>" + data.items[j].name + " </p> " +  '<form class="mobile_update"> <label for="mobile_quanity"class="two_lab">Quanity:    </label><input id="mobile_quanity"class="two mob_in"type="number"placeholder="'+data.items[j].quanity +'"><label for="mobile_min" class="three_lab">Min: </label><input class="three mob_in"type="number"placeholder="'+data.items[j].min+'"><label for="mobile_max"class="four_lab">Max: </label><input class="four mob_in"type="number"placeholder="'+data.items[j].max+'"><button class="ups">Update</button></form></div>');
+                        $(".Mind_" + all[i]).append("<div class='mobile_info'><p>" + data.items[j].name + " </p> " +  '<form class="mobile_update"> <label for="mobile_quanity"class="two_lab">Quanity:    </label><input id="mobile_quanity"class="twoM mob_in"type="number"placeholder="'+data.items[j].quanity +'"><label for="mobile_min" class="three_lab">Min: </label><input class="threeM mob_in"type="number"placeholder="'+data.items[j].min+'"><label for="mobile_max"class="four_lab">Max: </label><input class="fourM mob_in"type="number"placeholder="'+data.items[j].max+'"><button class="ups">Update</button></form></div>');
                     }
                 }
             }
@@ -476,6 +476,7 @@ $(document).ready(function () {
         for (let i = 0; i < updateForm.length; i++) {
             updateForm[i].addEventListener('submit', (e) => {
                 e.preventDefault()
+                console.log(quanity[i])
                 const name1 = updateForm[i].previousSibling.previousSibling.textContent
                 const desc1 = updateForm[i].previousSibling.textContent
                 let curr_quan = updateForm[i].previousSibling.previousSibling.previousSibling.textContent
@@ -512,6 +513,64 @@ $(document).ready(function () {
             })
         }
     }, 1000)
+
+    // mobile verion
+    setTimeout(function () {
+
+        const updateFormM = document.getElementsByClassName('mobile_update')
+        const quanityM = document.getElementsByClassName('twoM')
+        const minM = document.getElementsByClassName('threeM')
+        const maxM = document.getElementsByClassName('fourM')
+
+
+        //adding event listener to each form for updating
+        for (let i = 0; i < updateFormM.length; i++) {
+            updateFormM[i].addEventListener('submit', (e) => {
+                e.preventDefault()
+                let curr_quan
+                console.log(curr_quan)
+                $('.mobile_update').children().each(function(){
+                    if($(this).hasClass('twoM')){
+                         curr_quan = $(this).attr('placeholder')
+                         console.log(curr_quan)
+                    }
+                })
+                console.log(curr_quan)
+                const name1 = $(updateFormM[i]).prev().text()
+                const desc1 = $('.select_choice option:selected').text()
+                const quanity1 = quanityM[i].value
+                const min1 = minM[i].value
+                const max1 = maxM[i].value
+                if (min1 > Number(curr_quan)) {
+                    return 
+                }
+                if (max1 != '') {
+                    if (min1 > max1) {
+                        return 
+                    }
+                }
+                fetch('/update_full?name=' + name1 + '&quanity=' + quanity1 + '&desc=' + desc1 + '&min=' + min1 + '&max=' + max1).then((response) => {
+                    response.json().then((data) => {
+                        
+                    })
+
+                })
+                $('.mobile_update').children().each(function(){
+                    console.log('working')
+                    if (quanity1 != "" && $(this).hasClass('twoM')) {
+                        $(this).attr("placeholder",quanity1)
+                    }
+                    if (min1 != ""&& $(this).hasClass('threeM')) {
+                        $(this).attr("placeholder",min1)
+                    }
+                    if (max1 != ""&& $(this).hasClass('fourM')) {
+                        $(this).attr("placeholder",max1)
+                    }
+                })
+                
+            })
+        }
+    }, 1000)
     addForm.addEventListener('submit', (e) => {
         e.preventDefault()
         const des = desc.value
@@ -543,56 +602,56 @@ $(document).ready(function () {
 
     //function for updating all of the different forms at once
     //goes through all the different forms and clicks their update button
-    const up_all = () => {
-        setTimeout(function () {
-            const updateForm = document.getElementsByClassName('update')
-            const quanity = document.getElementsByClassName('two')
-            const min = document.getElementsByClassName('three')
-            const max = document.getElementsByClassName('four')
+    // const up_all = () => {
+    //     setTimeout(function () {
+    //         const updateForm = document.getElementsByClassName('update')
+    //         const quanity = document.getElementsByClassName('two')
+    //         const min = document.getElementsByClassName('three')
+    //         const max = document.getElementsByClassName('four')
 
-            for (let i = 0; i < updateForm.length; i++) {
-                updateForm[i].addEventListener('click', (e) => {
-                    e.preventDefault()
-                    const name1 = updateForm[i].previousSibling.previousSibling.textContent
-                    const desc1 = updateForm[i].previousSibling.textContent
-                    let curr_quan = updateForm[i].previousSibling.previousSibling.previousSibling.textContent
-                    curr_quan = curr_quan.split(" ").pop();
-                    const quanity1 = quanity[i].value
-                    const min1 = min[i].value
-                    const max1 = max[i].value
-                    if (min1 > Number(curr_quan)) {
-                        return 
-                    }
-                    if (max1 != '') {
-                        if (min1 > max1) {
-                            return 
-                        }
-                    }
-                    fetch('/update_full?name=' + name1 + '&quanity=' + quanity1 + '&desc=' + desc1 + '&min=' + min1 + '&max=' + max1)
+    //         for (let i = 0; i < updateForm.length; i++) {
+    //             updateForm[i].addEventListener('click', (e) => {
+    //                 e.preventDefault()
+    //                 const name1 = updateForm[i].previousSibling.previousSibling.textContent
+    //                 const desc1 = updateForm[i].previousSibling.textContent
+    //                 let curr_quan = updateForm[i].previousSibling.previousSibling.previousSibling.textContent
+    //                 curr_quan = curr_quan.split(" ").pop();
+    //                 const quanity1 = quanity[i].value
+    //                 const min1 = min[i].value
+    //                 const max1 = max[i].value
+    //                 if (min1 > Number(curr_quan)) {
+    //                     return 
+    //                 }
+    //                 if (max1 != '') {
+    //                     if (min1 > max1) {
+    //                         return 
+    //                     }
+    //                 }
+    //                 fetch('/update_full?name=' + name1 + '&quanity=' + quanity1 + '&desc=' + desc1 + '&min=' + min1 + '&max=' + max1)
 
-                    const quan_chan = updateForm[i].previousSibling.previousSibling.previousSibling.previousSibling.previousSibling
-                    const min_chan = updateForm[i].previousSibling.previousSibling.previousSibling.previousSibling
-                    const max_chan = updateForm[i].previousSibling.previousSibling.previousSibling
-                    if (quanity1 != "") {
-                        $(quan_chan).text("quanity: " + quanity1)
-                    }
-                    if (min1 != "") {
-                        $(min_chan).text("min: " + min1)
-                    }
-                    if (max1 != "") {
-                        $(max_chan).text("max: " + max1)
-                    }
+    //                 const quan_chan = updateForm[i].previousSibling.previousSibling.previousSibling.previousSibling.previousSibling
+    //                 const min_chan = updateForm[i].previousSibling.previousSibling.previousSibling.previousSibling
+    //                 const max_chan = updateForm[i].previousSibling.previousSibling.previousSibling
+    //                 if (quanity1 != "") {
+    //                     $(quan_chan).text("quanity: " + quanity1)
+    //                 }
+    //                 if (min1 != "") {
+    //                     $(min_chan).text("min: " + min1)
+    //                 }
+    //                 if (max1 != "") {
+    //                     $(max_chan).text("max: " + max1)
+    //                 }
 
-                })
-                updateForm[i].click()
-            }
-            setTimeout(function () {
-                location.reload()
-            }, 2000);
-            return 
+    //             })
+    //             updateForm[i].click()
+    //         }
+    //         setTimeout(function () {
+    //             location.reload()
+    //         }, 2000);
+    //         return 
 
-        }, 2000)
-    }
+    //     }, 2000)
+    // }
 
     //add click for updating all of the forms
     setTimeout(function () {
@@ -614,25 +673,24 @@ $(document).ready(function () {
     //resolution changes
     let width = $(window).width();
     if(width <= 768){
-        $('.container, .main-content , .big').addClass('hide');
+        $('.container, .main-content , .big, .cre_contain').addClass('hide');
         $('.nav_bar , .grid_mobile, .select_menu').removeClass('hide');
     }else{
-        $('.container, .main-content , .big').removeClass('hide');
+        $('.container, .main-content , .big, .cre_contain').removeClass('hide');
         $('.nav_bar , .grid_mobile, .select_menu').addClass('hide');
     }
     
     $( window ).resize(function() {
-        console.log('small')
         width = $(window).width();
         if(width <= 768){
             
-            $('.container , .main-content, .big').addClass('hide');
+            $('.container , .main-content, .big, .cre_contain').addClass('hide');
             $('.nav_bar , .grid_mobile, .select_menu').removeClass('hide');
             
         }
         else{
             $('.nav_bar , .grid_mobile, .select_menu').addClass('hide');
-            $('.container, .main-content, .big').removeClass('hide');
+            $('.container, .main-content, .big, .cre_contain').removeClass('hide');
             
         }
     });

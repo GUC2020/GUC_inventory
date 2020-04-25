@@ -266,7 +266,7 @@ and (max-width : 768px)  {
        "quan quan quanL none button"
        "minL min maxL max . ";
    }
-   .mobile_update .two {
+   .mobile_update .twoM {
        grid-area: quanL;
    }
    .mobile_update .two_lab{
@@ -274,7 +274,7 @@ and (max-width : 768px)  {
     text-align: end;
     font-size: 30px;
 }
-   .mobile_update .three{
+   .mobile_update .threeM{
     
     grid-area: min;
    }
@@ -283,7 +283,7 @@ and (max-width : 768px)  {
     grid-area: minL;
     font-size: 25px;
    }
-   .mobile_update .four {
+   .mobile_update .fourM {
     grid-area: max;
    }
    .mobile_update .four_lab{
