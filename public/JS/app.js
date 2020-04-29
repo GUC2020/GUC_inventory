@@ -37,7 +37,6 @@ fetch('/items').then((response)=>{
             if($(this).is(':selected')){
                 let curr_select = this;
                 $('.grid_mobile').children().each(function(){
-                    console.log('Mind_'+curr_select.textContent)
                     if($(this).hasClass('Mind_'+curr_select.textContent) ){
                      $(this).removeClass('hide')
                     }
@@ -93,7 +92,6 @@ setTimeout(function(){
     var i;
 
     for (i = 0; i < acc.length; i++) {
-        console.log('added')
         acc[i].addEventListener("click", function() {
         /* Toggle between adding and removing the "active" class,
         to highlight the button that controls the panel */
@@ -124,18 +122,14 @@ setTimeout(function(){
 },2000)
 
 setTimeout(function(){
-    console.log('ready')
     const updateForm = document.getElementsByClassName('update')
     const quanity = document.getElementsByClassName('two')
     for(let i=0;i<updateForm.length;i++){
         updateForm[i].addEventListener('submit',(e)=>{
             e.preventDefault()
-            // console.log('hi')
             const name1 = updateForm[i].previousSibling.previousSibling.textContent
             const desc1 = updateForm[i].previousSibling.textContent
-            console.log(desc1)
             const quanity1 = quanity[i].value
-            console.log(quanity1)
             fetch('/update?name='+name1+'&quanity='+quanity1+'&desc='+desc1).then((response)=>{
                 response.json().then((data)=>{
                 
@@ -144,7 +138,7 @@ setTimeout(function(){
             })
             const test = updateForm[i].previousSibling.previousSibling.previousSibling
             $(test).text("quanity: " +quanity1)
-            // location.reload(true);
+            $(updateForm[i]).find("input[type=number], textarea").val("")
         })
     }
 },1000)

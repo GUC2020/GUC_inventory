@@ -4,7 +4,6 @@ $(document).ready(function(){
     fetch('/users').then((response)=>{
         response.json().then((data)=>{
             user_object_array = data.user
-            console.log(user_object_array)
             for(i=0;i<user_object_array.length;i++){
                 if(user_object_array[i].admin == true){
                     $('.admins').append("<div class='user'><div class='close'></div><div class='name'>"+user_object_array[i].name+"</div></div>")
@@ -33,4 +32,7 @@ $(document).ready(function(){
         })
     }).catch((error)=>{
         console.log(error)
-    })})
+    })
+    $('.register').on('submit',function(){
+    })
+})

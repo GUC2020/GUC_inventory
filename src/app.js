@@ -175,6 +175,7 @@ app.post('/register', checkAuthenticated,checkAdmin, async (req, res) => {
           admin = true
       }
       create.add_user(req.body.name.toLowerCase(), admin, hashedPassword)
+      res.redirect('/register')
     } catch {
       res.redirect('/register')
     }

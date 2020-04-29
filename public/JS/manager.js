@@ -32,7 +32,7 @@ $(document).ready(function () {
                 $(".grid").append("<div class='item_container ind_" + all[i] + "'></div>")
                 for (j = 0; j < data.items.length; j++) {
                     if (data.items[j].desc === all[i]) {
-                        $(".ind_" + all[i]).append("<div class='info'><div class='delete'>X</div><p>" + data.items[j].name + " </p><p> quanity: " + data.items[j].quanity + "</p><p>min: " + data.items[j].min + "</p><p>max: " + data.items[j].max + "</p><p style='display:none'>" + data.items[j].name + "</p><p style='display:none'>" + data.items[j].desc + '<form class="update"> <input class="two"type="number"placeholder="quantity"><input class="three"type="number"placeholder="min"><input class="four"type="number"placeholder="max"><button class="ups">Update</button></form></div>');
+                        $(".ind_" + all[i]).append("<div class='info'><div class='closed'></div><p>" + data.items[j].name + " </p><p> quanity: " + data.items[j].quanity + "</p><p>min: " + data.items[j].min + "</p><p>max: " + data.items[j].max + "</p><p style='display:none'>" + data.items[j].name + "</p><p style='display:none'>" + data.items[j].desc + '<form class="update"> <input class="two"type="number"placeholder="quantity"><input class="three"type="number"placeholder="min"><input class="four"type="number"placeholder="max"><button class="ups">Update</button></form></div>');
                     }
                 }
 
@@ -45,7 +45,6 @@ $(document).ready(function () {
             }
             $('.select_type option').each(function(){
                 let curr_type = this.textContent;
-                console.log(curr_type)
                 if(curr_type == 'Stock'){
                     $('.select_choice option').each(function(){
                         if($(this).is(':selected')){
@@ -476,7 +475,6 @@ $(document).ready(function () {
         for (let i = 0; i < updateForm.length; i++) {
             updateForm[i].addEventListener('submit', (e) => {
                 e.preventDefault()
-                console.log(quanity[i])
                 const name1 = updateForm[i].previousSibling.previousSibling.textContent
                 const desc1 = updateForm[i].previousSibling.textContent
                 let curr_quan = updateForm[i].previousSibling.previousSibling.previousSibling.textContent
@@ -528,14 +526,11 @@ $(document).ready(function () {
             updateFormM[i].addEventListener('submit', (e) => {
                 e.preventDefault()
                 let curr_quan
-                console.log(curr_quan)
                 $('.mobile_update').children().each(function(){
                     if($(this).hasClass('twoM')){
                          curr_quan = $(this).attr('placeholder')
-                         console.log(curr_quan)
                     }
                 })
-                console.log(curr_quan)
                 const name1 = $(updateFormM[i]).prev().text()
                 const desc1 = $('.select_choice option:selected').text()
                 const quanity1 = quanityM[i].value
@@ -556,7 +551,6 @@ $(document).ready(function () {
 
                 })
                 $('.mobile_update').children().each(function(){
-                    console.log('working')
                     if (quanity1 != "" && $(this).hasClass('twoM')) {
                         $(this).attr("placeholder",quanity1)
                     }
@@ -567,7 +561,7 @@ $(document).ready(function () {
                         $(this).attr("placeholder",max1)
                     }
                 })
-                
+                $(updateFormM[i]).find("input[type=number], textarea").val("")
             })
         }
     }, 1000)
@@ -581,19 +575,32 @@ $(document).ready(function () {
         fetch('/create?desc=' + des + '&nam=' + na + '&quan=' + qua + '&min=' + mi + '&max=' + ma).then((response) => {
             response.json().then((data) => {})
         })
+        location.reload();
     })
     setTimeout(function () {
-        const curr_delete = document.getElementsByClassName('delete')
+        const curr_delete = document.getElementsByClassName('closed')
+        
         for (i = 0; i < curr_delete.length; i++) {
-            $(curr_delete[i]).click(function () {
-                $(this).parent().css({
-                    'max-height': 0,
-                    'display': 'none'
+            $(curr_delete[i]).click(function(){
+                let = curr_this= this;
+                $('.delete_form').fadeIn().append('<p>Are you sure you would like to delete <span>'+$(this).siblings().text()+'?</span></p><div class="answer"><button class="yes">Yes</button><button class="no">No</button></div>')
+                let close = $(this).siblings().text()
+                $('.yes').click(function(){
+                    $(curr_this).parent().css({
+                        'max-height': 0,
+                        'display': 'none'
+                    })
+                    const na = curr_this.nextSibling.textContent
+                    const des = curr_this.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.textContent
+                    fetch('/delete?desc=' + des + '&nam=' + na).then((response) => {
+                        response.json().then((data) => {})
+                    })
+                    $('.delete_form').fadeOut().empty()
+                    full.remove()
+                    
                 })
-                const na = this.nextSibling.textContent
-                const des = this.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.textContent
-                fetch('/delete?desc=' + des + '&nam=' + na).then((response) => {
-                    response.json().then((data) => {})
+                $('.no').click(function(){
+                    $('.delete_form').fadeOut().empty()
                 })
             })
 
