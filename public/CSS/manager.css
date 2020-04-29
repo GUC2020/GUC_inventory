@@ -295,9 +295,12 @@ and (max-width : 768px)  {
     background-color: transparent;
     color: #4B382A ;
     font-weight: bold;
-    font-size: 50px;
+    font-size: 40px;
     text-align: center;
     width: fit-content;
+   }
+   .select_type{
+       margin-left: 20px;
    }
    .select_item{
        height: 100%;
@@ -312,7 +315,7 @@ and (max-width : 768px)  {
    }
    .mobile_info{
        display: flex;
-       flex-wrap: nowrap;
+       flex-wrap: wrap;
        flex-direction: row;
        justify-content: center;
        align-items: center;
